@@ -550,6 +550,7 @@ body {
     color: #b0b0b0;
     font-size: 1rem;
     line-height: 1.6;
+    pointer-events: auto;
 }
 
 .timeline-list li::before {
@@ -571,6 +572,8 @@ body {
 #resume .timeline-list li {
     padding: 0.5rem 0;
     font-size: 0.95rem;
+    position: static;
+    cursor: default;
 }
 
 #resume .timeline-list li::before {
@@ -578,6 +581,36 @@ body {
     position: relative;
     margin-right: 0.5rem;
     font-size: 1rem;
+}
+
+/* Disable custom cursor effects in Education section to prevent jitter */
+#resume * {
+    cursor: default !important;
+}
+
+/* Completely hide custom cursor in Education section */
+#resume .cursor-dot,
+#resume .cursor-outline {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Force cursor elements to not render over Education */
+.cursor-dot:has(~ #resume:hover),
+.cursor-outline:has(~ #resume:hover) {
+    display: none !important;
+}
+
+/* Prevent any hover transforms or transitions in Education to stop glitch */
+#resume .timeline-list li,
+#resume .timeline-list li::before,
+#resume .timeline-content,
+#resume .timeline-item {
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    pointer-events: auto !important;
 }
 
 /* Projects Grid */
@@ -608,7 +641,7 @@ body {
 
 .project-card:hover {
     border-left-color: rgba(201, 169, 97, 0.8);
-    transform: translateX(10px);
+    transform: translateX(10px) !important;
 }
 
 .project-logo {
@@ -705,6 +738,96 @@ body {
 }
 
 /* Skills Section */
+.skills-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.skill-category-compact {
+    background: transparent;
+    padding: 2rem;
+    border-radius: 0;
+    border-left: 2px solid rgba(201, 169, 97, 0.4);
+    padding-left: 1.5rem;
+    transition: var(--transition);
+}
+
+.skill-category-compact:hover {
+    border-left-color: rgba(201, 169, 97, 0.8);
+    transform: translateX(5px);
+}
+
+.skill-category-compact h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #e8e8e8;
+}
+
+.skill-category-compact h3 i {
+    color: var(--accent-color);
+}
+
+.skill-category-compact p {
+    color: #b0b0b0;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.skills-toggle-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.skills-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: #c9a961;
+    border: 1px solid rgba(201, 169, 97, 0.5);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.skills-toggle-btn:hover {
+    background: rgba(201, 169, 97, 0.1);
+    border-color: #c9a961;
+}
+
+.skills-toggle-btn:active {
+    background: rgba(201, 169, 97, 0.15);
+}
+
+.skills-toggle-btn i {
+    transition: transform 0.3s ease;
+}
+
+.skills-toggle-btn.active i {
+    transform: rotate(180deg);
+}
+
+.skills-full-list {
+    max-height: 5000px;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.skills-full-list.hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
 .skills-section {
     margin-bottom: 5rem;
 }
@@ -1236,11 +1359,7 @@ section:not(.hero) {
 /* Card lift effect on hover */
 .project-card {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(201, 169, 97, 0.3);
+    will-change: transform;
 }
 
 .timeline-item {

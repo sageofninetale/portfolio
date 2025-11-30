@@ -153,28 +153,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Project card 3D tilt effect on hover
-const projectCardsHover = document.querySelectorAll('.project-card');
-
-projectCardsHover.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 15;
-        const rotateY = (centerX - x) / 15;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-    });
-});
+// Project card 3D tilt effect on hover - DISABLED to prevent glitch
+// The CSS hover effect is sufficient for a smooth experience
 
 // Form Submission Handler - removed, using EmailJS instead
 
@@ -232,7 +212,7 @@ cursorStyle.textContent = `
         border-radius: 50%;
         opacity: 0;
         transform: translate(-50%, -50%);
-        transition: opacity 0.3s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: opacity 0.3s ease, transform 0.15s ease-out;
         z-index: 10000;
     }
     
@@ -260,12 +240,31 @@ cursorStyle.textContent = `
             display: none;
         }
     }
+    
+    /* Hide cursor when over Education section */
+    body.in-education .cursor-dot,
+    body.in-education .cursor-outline {
+        opacity: 0 !important;
+        display: none !important;
+    }
 `;
 document.head.appendChild(cursorStyle);
 
 let mouseX = 0, mouseY = 0;
 let cursorDotX = 0, cursorDotY = 0;
 let cursorOutlineX = 0, cursorOutlineY = 0;
+
+// Track when mouse enters/leaves Education section
+const educationSection = document.getElementById('resume');
+if (educationSection) {
+    educationSection.addEventListener('mouseenter', () => {
+        document.body.classList.add('in-education');
+    });
+    
+    educationSection.addEventListener('mouseleave', () => {
+        document.body.classList.remove('in-education');
+    });
+}
 
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -313,6 +312,8 @@ const projectLinks = {
     'jp-morgan': 'https://drive.google.com/drive/folders/1dyFLXyGfobFDZ1CO_NQF1Lgd3L93jJFS?usp=sharing',
     'project-sensei': 'https://chatgpt.com/g/g-6906a008c9208191b5ce49f473aed10e-projectsensei-ai',
     'kineticiq': 'https://chatgpt.com/g/g-68f8c5dbb4e88191972bfe3a43de6b21-kinetiq',
+    'nudge': 'https://nudgecoach.vercel.app/',
+    'urbanfuel': 'https://docs.google.com/spreadsheets/d/1hIV3z_AnTiRE9-ef5n7nuOFHU5YayShWsMixM7evHlI/edit?usp=sharing',
     'pickle': null // Coming soon - no link yet
 };
 
@@ -584,6 +585,24 @@ const easterEggGame = {
 window.addEventListener('load', () => {
     easterEggGame.init();
 });
+
+// Skills Section Toggle
+const skillsToggleBtn = document.getElementById('skills-toggle-btn');
+const skillsFullList = document.getElementById('skills-full-list');
+
+if (skillsToggleBtn && skillsFullList) {
+    skillsToggleBtn.addEventListener('click', () => {
+        skillsFullList.classList.toggle('hidden');
+        skillsToggleBtn.classList.toggle('active');
+        
+        const btnText = skillsToggleBtn.querySelector('span');
+        if (skillsFullList.classList.contains('hidden')) {
+            btnText.textContent = 'Show Full Skill List';
+        } else {
+            btnText.textContent = 'Hide Full Skill List';
+        }
+    });
+}
 
 // Resume Download Handler
 const downloadBtn = document.querySelector('.download-btn');
