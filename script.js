@@ -474,24 +474,6 @@ const projectsData = [
         sizeClass: 'bento-span-2x1',
         liveUrl: 'https://savora-479460496934.us-west1.run.app/',
         moreUrl: null
-    },
-    {
-        id: 'portfolio-site',
-        title: 'Interactive Portfolio Website',
-        category: 'WEB',
-        client: 'Personal Project',
-        tags: ['web'],
-        details: [
-            'Modern portfolio showcasing data analytics and AI projects',
-            'Interactive visualizations with smooth animations and transitions',
-            'Engaging Easter egg game built with vanilla JavaScript',
-            'Responsive design with custom CSS and performance optimization'
-        ],
-        tools: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'GitHub Pages'],
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop',
-        sizeClass: 'bento-medium',
-        liveUrl: 'https://sageofninetale.github.io/portfolio/#home',
-        moreUrl: 'https://github.com/sageofninetale/portfolio'
     }
 ];
 
