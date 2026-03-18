@@ -296,6 +296,32 @@ body::before {
     position: relative;
 }
 
+/* Education section: deep navy overlay scoped to this section only */
+#resume {
+    position: relative;
+    isolation: isolate;
+}
+
+#resume::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 13, 31, 0.85);  /* #050d1f at 85% */
+    z-index: 0;
+    pointer-events: none;
+}
+
+#resume .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Initial hidden state for GSAP (Education cards only) */
+.edu-card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
 .alt-bg::before {
     display: none;
 }

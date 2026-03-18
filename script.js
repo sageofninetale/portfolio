@@ -57,6 +57,35 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     });
 }
 
+// ─── Education Section: Staggered Fade-Up Animation ───────────────────────────
+// Runs independently so it always works even if the general tunnel block above
+// is removed or refactored.
+(function initEducationAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    const eduCards = document.querySelectorAll('.edu-card');
+    if (!eduCards.length) return;
+
+    gsap.fromTo(
+        eduCards,
+        {
+            y: 30,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.75,
+            ease: 'power2.out',
+            stagger: 0.15,                  // 0.15s apart, as requested
+            scrollTrigger: {
+                trigger: '#resume',
+                start: 'top 75%',           // fire when section top hits 75% of viewport
+                toggleActions: 'play none none none',
+            },
+        }
+    );
+})();
 
 // About Section Read More Toggle
 function toggleAbout() {
