@@ -1,84 +1,62 @@
 // ─── GSAP Tunnel Camera Effect ────────────────────────────────────────────────
-// Simulates a space tunnel camera flying through sections on scroll
+// Gentle entrance / exit that never fully hides content so background stays visible
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Apply perspective to body for 3D depth
-    document.body.style.perspective = '1200px';
-
-    const tunnelSections = document.querySelectorAll('.tunnel-section');
-
-    tunnelSections.forEach((section) => {
-        // Set initial states so elements start from far away & invisible
-        gsap.set(section, { opacity: 0, scale: 0.7, transformOrigin: 'center center' });
-
-        // Entrance: elements fly toward camera as you scroll in
-        ScrollTrigger.create({
-            trigger: section,
-            start: 'top 90%',
-            end: 'top 20%',
-            scrub: 0.6,
-            onUpdate: (self) => {
-                const p = self.progress; // 0 to 1
-                gsap.to(section, {
-                    scale: 0.7 + p * 0.3,       // 0.7 → 1.0
-                    opacity: p,                  // 0 → 1
-                    duration: 0,
-                });
+    // Animate individual timeline cards for stagger entry
+    document.querySelectorAll('.tunnel-section .timeline-item').forEach((item, i) => {
+        gsap.fromTo(item,
+            { y: 45, opacity: 0, scale: 0.96 },
+            {
+                y: 0, opacity: 1, scale: 1,
+                duration: 0.85,
+                delay: (i % 3) * 0.12,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none'
+                }
             }
-        });
-
-        // Exit: fly past camera as you scroll away (gentle scale up + fade)
-        ScrollTrigger.create({
-            trigger: section,
-            start: 'bottom 80%',
-            end: 'bottom 10%',
-            scrub: 0.6,
-            onUpdate: (self) => {
-                const p = self.progress; // 0 to 1
-                gsap.to(section, {
-                    scale: 1 + p * 0.08,        // 1.0 → 1.08 (slight overshoot)
-                    opacity: 1 - p * 0.6,        // 1 → 0.4
-                    duration: 0,
-                });
-            }
-        });
+        );
     });
 
-    // Also animate individual timeline cards for stagger entry
-    document.querySelectorAll('.tunnel-section .timeline-item').forEach((item, i) => {
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            y: 50,
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.8,
-            delay: i * 0.1,
-            ease: 'power3.out'
-        });
+    // Animate section titles
+    document.querySelectorAll('.tunnel-section .section-title').forEach((title) => {
+        gsap.fromTo(title,
+            { y: 30, opacity: 0 },
+            {
+                y: 0, opacity: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: title,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
     });
 
     // Animate project cards
     document.querySelectorAll('.tunnel-section .project-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            y: 60,
-            opacity: 0,
-            scale: 0.9,
-            duration: 0.9,
-            delay: i * 0.1,
-            ease: 'power3.out'
-        });
+        gsap.fromTo(card,
+            { y: 50, opacity: 0, scale: 0.93 },
+            {
+                y: 0, opacity: 1, scale: 1,
+                duration: 0.9,
+                delay: (i % 3) * 0.12,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 88%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
     });
 }
+
 
 // About Section Read More Toggle
 function toggleAbout() {
