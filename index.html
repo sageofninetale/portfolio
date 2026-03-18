@@ -30,64 +30,55 @@
 
         gtag('config', 'G-EDX41XD0BK');
     </script>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <!-- 3D Canvas -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- Fullscreen Video Background -->
+    <div class="video-background">
+        <video autoplay loop muted playsinline>
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">Aryan Subhash</div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#resume" class="nav-link">Education</a></li>
-                <li><a href="#work" class="nav-link">Work</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#game" class="nav-link">Game</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <nav class="web3-nav">
+        <div class="web3-nav-left">
+            <span class="logo-wordmark">ARYAN SUBHASH</span>
+            <div class="nav-links">
+                <a href="#about">About <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
+                <a href="#resume">Education <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
+                <a href="#projects">Work <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
+                <a href="#contact">Contact <i class="fa-solid fa-chevron-down nav-chevron"></i></a>
             </div>
+        </div>
+        <div class="web3-nav-right">
+            <a href="#contact" class="pill-btn nav-btn">
+                <div class="btn-glow"></div>
+                <span>Contact Me</span>
+            </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="particles" id="particles"></div>
-        <div class="hero-content-center">
-            <div class="hero-text-center fade-in">
-                <h1 class="hero-title">Hey, I'm Aryan Subhash.</h1>
-                <div class="title-underline"></div>
-                <h3 class="hero-subtitle">
-                    I'm a Data & Analytics Professional focused on uncovering the story behind the numbers.
-                </h3>
-                <p class="hero-description">
-                    I've worked across housing, fintech, and consulting — building forecasting models, automated Power
-                    BI dashboards, and data governance frameworks that help teams make clearer, faster decisions.
-                    <br>Let's start scrolling and explore my work.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/aryansubhash/" target="_blank" class="social-icon"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/sageofninetale" target="_blank" class="social-icon" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
+    <section class="web3-hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Available for new opportunities in 2026</span>
             </div>
-        </div> dsc
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <p>Scroll Down</p>
+            
+            <h1 class="hero-heading">Data Insights at the Speed of Experience</h1>
+            
+            <p class="hero-subtitle">
+                *Powering seamless analysis and real-time visualization, Aryan provides the foundation for teams to move with purpose, leveraging resilience, speed, and scale to shape the future.
+            </p>
+            
+            <a href="#projects" class="pill-btn solid-white-btn cta-btn">
+                <div class="btn-glow"></div>
+                <span>View Projects</span>
+            </a>
         </div>
     </section>
 
@@ -631,11 +622,6 @@
                     </text>
                 </svg>
             </div>
-        </div>
-    </footer>
-
-    <!-- Three.js (r128) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 
