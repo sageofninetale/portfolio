@@ -126,6 +126,30 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     });
 })();
 
+// ─── Skills: Tech Badge Pill Grid stagger on scroll ──────────────────────────
+(function initSkillsAnimation() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    const pills = document.querySelectorAll('.skill-pill');
+    if (!pills.length) return;
+
+    gsap.fromTo(
+        pills,
+        { y: 16, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.45,
+            ease: 'power2.out',
+            stagger: 0.06,              // 60ms between each pill — clean cascade
+            scrollTrigger: {
+                trigger: '#skills',
+                start: 'top 78%',
+                toggleActions: 'play none none none',
+            },
+        }
+    );
+})();
 
 // About Section Read More Toggle
 function toggleAbout() {

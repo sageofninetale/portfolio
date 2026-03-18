@@ -1000,7 +1000,79 @@ body::before {
     transform: translateX(5px);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   SKILLS — Tech Badge Pill Grid
+   ═══════════════════════════════════════════════════════════════ */
+.skills-pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+}
+
+/* Base pill */
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    background: rgba(10, 20, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    font-family: 'General Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: default;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, background 0.25s ease;
+    /* Initial state for GSAP */
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.skill-pill i {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+}
+
+/* Blue glow — Data tools */
+.skill-pill.pill-data:hover {
+    border-color: rgba(79, 142, 247, 0.6);
+    box-shadow:
+        0 0 18px rgba(79, 142, 247, 0.25),
+        0 0 6px rgba(79, 142, 247, 0.12) inset;
+    color: #7bb3ff;
+    background: rgba(79, 142, 247, 0.1);
+}
+.skill-pill.pill-data:hover i { opacity: 1; color: #4f8ef7; }
+
+/* Purple glow — AI tools */
+.skill-pill.pill-ai:hover {
+    border-color: rgba(167, 105, 255, 0.6);
+    box-shadow:
+        0 0 18px rgba(167, 105, 255, 0.25),
+        0 0 6px rgba(167, 105, 255, 0.12) inset;
+    color: #c08bff;
+    background: rgba(167, 105, 255, 0.1);
+}
+.skill-pill.pill-ai:hover i { opacity: 1; color: #a769ff; }
+
+/* Cyan glow — Cloud / Dev tools */
+.skill-pill.pill-dev:hover {
+    border-color: rgba(0, 212, 255, 0.55);
+    box-shadow:
+        0 0 18px rgba(0, 212, 255, 0.22),
+        0 0 6px rgba(0, 212, 255, 0.1) inset;
+    color: #4de8ff;
+    background: rgba(0, 212, 255, 0.08);
+}
+.skill-pill.pill-dev:hover i { opacity: 1; color: #00d4ff; }
+
 /* Skills Section */
+
 .skills-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
