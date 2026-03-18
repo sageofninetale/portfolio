@@ -43,64 +43,46 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation - Web3 Style */
 .web3-nav {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 20px 120px;
+    padding: 25px 0;
     background: transparent;
     transition: all 0.3s ease;
 }
 
 .web3-nav.scrolled {
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.web3-nav-left {
+.nav-links-centered {
     display: flex;
-    align-items: center;
-    gap: 40px;
+    gap: 45px;
 }
 
-.logo-wordmark {
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: #ffffff;
-    width: 187px;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
+.nav-links-centered a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    transition: opacity 0.2s;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    opacity: 0.85;
 }
 
-.nav-links a:hover {
-    opacity: 0.8;
-}
-
-.nav-chevron {
-    margin-left: 14px;
-    font-size: 10px;
+.nav-links-centered a:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    text-shadow: 0 0 10px rgba(255,255,255,0.4);
 }
 
 /* Pill Buttons */
@@ -171,7 +153,31 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#sparkles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sparkle {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(0.5); }
 }
 
 .web3-hero {

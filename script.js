@@ -1,3 +1,33 @@
+// Generate Sparkles for the Hero Overlay
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('sparkles-container');
+    if (!container) return;
+    
+    // Create 75 random sparkling stars
+    for (let i = 0; i < 75; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        
+        // Random position, size, and animation delay
+        const size = Math.random() * 2.5 + 1; // 1px to 3.5px
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.left = `${Math.random() * 100}%`;
+        
+        // Random twinkle duration and delay
+        const duration = Math.random() * 3 + 2; // 2s to 5s
+        const delay = Math.random() * 5;
+        sparkle.style.animationDuration = `${duration}s`;
+        sparkle.style.animationDelay = `${delay}s`;
+        
+        // Vary the opacity
+        sparkle.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        container.appendChild(sparkle);
+    }
+});
+
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -22,7 +52,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar Scroll Effect
-const navbar = document.getElementById('navbar');
+const navbar = document.querySelector('.web3-nav');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
@@ -40,7 +70,7 @@ window.addEventListener('scroll', () => {
 
 // Active Navigation Link on Scroll
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const navLinks = document.querySelectorAll('.nav-links-centered a');
 
 function activateNavLink() {
     let current = '';
