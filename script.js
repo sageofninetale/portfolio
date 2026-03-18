@@ -971,7 +971,7 @@ if (downloadBtn) {
 }
 
 // ==========================================
-// 3D Background Setup (Three.js WebGL)
+// 3D Background Setup (Three.js WebGL + GLSL Shader)
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof THREE === 'undefined') return;
@@ -979,157 +979,146 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
 
-    // Scene, Camera, Renderer
+    // We use an Orthographic camera and a plane to run a full-screen GLSL Fragment Shader
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.012); // Pitch black deep fog
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 10;
-    camera.position.y = 2; // Look slightly down into the vortex
-    camera.lookAt(0, 0, -50);
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: false, antialias: true });
-    renderer.setClearColor(0x000000, 1); // Pure black background
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: false, antialias: false });
+    renderer.setClearColor(0x000000, 1);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Create the Space Vortex using particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 15000; // Very dense
-    
-    const posArray = new Float32Array(particlesCount * 3);
-    const colorsArray = new Float32Array(particlesCount * 3);
-    
-    const colorDeepBlue = new THREE.Color(0x051b3d);
-    const colorCyan = new THREE.Color(0x00f2fe);
-    const colorWhite = new THREE.Color(0xffffff);
-    
-    for(let i = 0; i < particlesCount; i++) {
-        // Depth parameter: 0 is far away, 1 is close to camera
-        const depth = Math.pow(Math.random(), 1.2); 
-        const z = -200 + (depth * 250); // From -200 deep inside to +50 towards us
-        
-        // Swirl pattern: angle grows as we go deeper
-        const angle = Math.random() * Math.PI * 2 + (depth * 15);
-        
-        // Funnel shape: radius expands drastically towards the camera
-        const radius = 3 + Math.pow(depth, 3) * 80; 
-        
-        // Scatter for volumetric 3D feel
-        const scatterRange = radius * 0.15;
-        const scatterX = (Math.random() - 0.5) * scatterRange;
-        const scatterY = (Math.random() - 0.5) * scatterRange;
-        
-        const x = Math.cos(angle) * radius + scatterX;
-        const y = Math.sin(angle) * radius + scatterY;
-        
-        posArray[i*3] = x;
-        posArray[i*3 + 1] = y;
-        posArray[i*3 + 2] = z;
+    const geometry = new THREE.PlaneGeometry(2, 2);
 
-        // Assign colors randomly, favoring cyan/white closer to the rim
-        const mix = Math.random();
-        let selectedColor;
-        if (mix < 0.5) selectedColor = colorDeepBlue;
-        else if (mix < 0.9) selectedColor = colorCyan;
-        else selectedColor = colorWhite;
+    const uniforms = {
+        u_time: { value: 0.0 },
+        u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        u_scroll: { value: 0.0 }
+    };
 
-        colorsArray[i*3] = selectedColor.r;
-        colorsArray[i*3 + 1] = selectedColor.g;
-        colorsArray[i*3 + 2] = selectedColor.b;
-    }
+    const material = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: `
+            void main() {
+                gl_Position = vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform float u_time;
+            uniform vec2 u_resolution;
+            uniform float u_scroll;
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
-    
-    // Techie particle material
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.12,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending
+            // Simple 3D noise function for the swirling cosmic dust
+            float hash(vec3 p) {
+                p  = fract( p*0.3183099+.1 );
+                p *= 17.0;
+                return fract( p.x*p.y*p.z*(p.x+p.y+p.z) );
+            }
+
+            float noise(in vec3 x) {
+                vec3 i = floor(x);
+                vec3 f = fract(x);
+                f = f*f*(3.0-2.0*f);
+                return mix(mix(mix( hash(i+vec3(0,0,0)), hash(i+vec3(1,0,0)),f.x),
+                               mix( hash(i+vec3(0,1,0)), hash(i+vec3(1,1,0)),f.x),f.y),
+                           mix(mix( hash(i+vec3(0,0,1)), hash(i+vec3(1,0,1)),f.x),
+                               mix( hash(i+vec3(0,1,1)), hash(i+vec3(1,1,1)),f.x),f.y),f.z);
+            }
+
+            // Fractal Brownian Motion (FBM) for complex cloudy textures
+            float fbm(vec3 p) {
+                float f = 0.0;
+                float w = 0.5;
+                for (int i = 0; i < 5; i++) {
+                    f += w * noise(p);
+                    p *= 2.0;
+                    w *= 0.5;
+                }
+                return f;
+            }
+
+            void main() {
+                // Normalize pixel coordinates
+                vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+
+                // Adjust time based on scroll to "dive" into the vortex
+                float t = u_time * 0.4 + (u_scroll * 0.005);
+                
+                // Get polar coordinates (radius and angle)
+                float r = length(uv);
+                float angle = atan(uv.y, uv.x);
+                
+                // The Vortex Twist: angle changes based on distance (closer to center = drastically more twisted)
+                // This creates the massive black hole spiral effect
+                float twist = 2.0 / (r + 0.1);
+                angle -= twist + t;
+                
+                // Convert back to cartesian coordinates after twisting
+                vec2 twistedUV = vec2(cos(angle), sin(angle)) * r;
+
+                // Generate volumetric gas clouds
+                // We sample 3D FBM noise using our twisted 2D UVs and time (Z)
+                vec3 noisePos = vec3(twistedUV * 3.0, t * 1.5);
+                
+                // Layer multiple frequencies of noise
+                float n1 = fbm(noisePos);
+                float n2 = fbm(noisePos * 2.0 + vec3(10.0));
+                
+                // Combine masks to create wispy, tearing gas
+                float gas = smoothstep(0.2, 0.8, n1 * n2 * 2.0);
+                
+                // Create the Black Hole event horizon masking
+                // Completely black in the dead center
+                float blackHole = smoothstep(0.1, 0.4, r);
+                
+                // The Accretion Disk glow (brightest just outside the black hole)
+                float accretionDisk = smoothstep(0.0, 0.2, r) * smoothstep(0.8, 0.2, r);
+
+                // Colors matches the EOS reference (deep blue/cyan/white)
+                vec3 deepSpace = vec3(0.01, 0.05, 0.15);
+                vec3 cyanGlow = vec3(0.1, 0.7, 1.0);
+                vec3 hotWhite = vec3(0.9, 0.95, 1.0);
+
+                // Build the final color
+                vec3 color = deepSpace * gas;
+                color += cyanGlow * gas * accretionDisk * 2.0;
+                color += hotWhite * pow(gas * accretionDisk, 3.0) * 4.0;
+                
+                // Apply the black hole mask to eat all light at the center
+                color *= blackHole;
+
+                // Subtle background stars moving along the twist
+                float starNoise = hash(vec3(floor(angle * 10.0), floor(r * 10.0), floor(t * 0.1)));
+                float star = pow(starNoise, 100.0) * blackHole;
+                color += vec3(star);
+
+                // Optional: slight vignette at the very edges of the screen
+                color *= smoothstep(1.5, 0.5, r);
+
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `
     });
-    
-    const vortexMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(vortexMesh);
 
-    // Add some larger standalone stars in the background
-    const starsGeo = new THREE.BufferGeometry();
-    const starsCount = 500;
-    const starsPos = new Float32Array(starsCount * 3);
-    for(let i=0; i<starsCount*3; i++) {
-        starsPos[i] = (Math.random() - 0.5) * 400;
-    }
-    starsGeo.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
-    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2, transparent: true, opacity: 0.8 });
-    const starsMesh = new THREE.Points(starsGeo, starsMat);
-    scene.add(starsMesh);
-
-    // Mouse movement interaction (subtle sway)
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
+    const plane = new THREE.Mesh(geometry, material);
+    scene.add(plane);
 
     // Resize Handler
     window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
     });
 
-    // Scroll Handler affecting vortex velocity
-    let currentScroll = 0;
+    // Scroll Handler affecting vortex velocity/depth
     window.addEventListener('scroll', () => {
-        currentScroll = window.scrollY;
+        uniforms.u_scroll.value = window.scrollY;
     });
 
     // Animation Loop
     const clock = new THREE.Clock();
-    let oldTime = 0;
-    
     function animate() {
         requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
-        const deltaTime = elapsedTime - oldTime;
-        oldTime = elapsedTime;
-
-        // Smoothly interpolate camera target based on mouse
-        targetX = mouseX * 2;
-        targetY = mouseY * 2;
-        camera.position.x += (targetX - camera.position.x) * 0.02;
-        camera.position.y += (targetY - camera.position.y + 2) * 0.02; // keeping base Y at 2
-        camera.lookAt(0, 0, -50);
-
-        // Rotate particle tunnel slowly inwards
-        vortexMesh.rotation.z -= 0.0015;
-
-        // Simulate falling INTO the vortex by slowly moving points towards camera and resetting
-        const positions = vortexMesh.geometry.attributes.position.array;
-        
-        // Base pull speed + scroll speed multiplier
-        const pullSpeed = 10 + (currentScroll * 0.05);
-
-        for(let i = 0; i < particlesCount; i++) {
-            // Move Z towards camera
-            positions[i*3 + 2] += pullSpeed * deltaTime;
-            
-            // If particle passes camera, send it deep back into the vortex hole
-            if (positions[i*3 + 2] > 20) {
-                positions[i*3 + 2] = -200 - Math.random() * 50;
-            }
-        }
-        vortexMesh.geometry.attributes.position.needsUpdate = true;
-        
-        // Slow star rotation
-        starsMesh.rotation.z += 0.0002;
-        starsMesh.rotation.y += 0.0001;
-
+        uniforms.u_time.value = clock.getElapsedTime();
         renderer.render(scene, camera);
     }
     
