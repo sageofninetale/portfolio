@@ -353,49 +353,29 @@
 
 
 
-    <!-- Game Section -->
+    <!-- Game Section (Terminal Easter Egg) -->
     <section id="game" class="section">
         <div class="container">
-            <h2 class="section-title">Game</h2>
-            <h3 class="game-subtitle">Easter Egg Hunt 🥚</h3>
+            <h2 class="section-title">Terminal</h2>
+            <h3 class="game-subtitle">Access the Mainframe 💻</h3>
 
-            <!-- Game Prompt -->
-            <div id="game-prompt" class="game-prompt">
-                <p class="prompt-question">Do you want to play the hunt for golden eggs?</p>
-                <div class="prompt-buttons">
-                    <button id="play-yes" class="game-btn yes-btn">Yes, Let's Play! 🎮</button>
-                    <button id="play-no" class="game-btn no-btn">No, Thanks</button>
-                </div>
-            </div>
-
-            <!-- Game Content (Hidden initially) -->
-            <div id="game-content" class="game-content hidden">
-                <p class="section-subtitle">
-                    Hidden golden eggs 🥚 are scattered throughout this portfolio. Can you find them all?
-                </p>
-                <div class="game-layout">
-                    <div class="game-instructions">
-                        <h3>How to Play:</h3>
-                        <ul>
-                            <li>🔍 Scroll through the entire portfolio</li>
-                            <li>🥚 Look for golden eggs hidden in different sections</li>
-                            <li>🖱️ Click on each egg you find to collect it</li>
-                            <li>🎯 Try to find all 10 hidden eggs!</li>
-                        </ul>
-                        <p class="game-hint">💡 <strong>Hint:</strong> Some eggs hide in plain sight, others blend with
-                            the design!</p>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="term-btn term-close"></span>
+                        <span class="term-btn term-min"></span>
+                        <span class="term-btn term-max"></span>
                     </div>
-                    <div class="score-display">
-                        <div class="score-box">
-                            <span class="score-label">Eggs Found:</span>
-                            <span class="score-value" id="score">0/10</span>
-                        </div>
-                        <div id="completion-message" class="completion-message hidden">
-                            <h3>🎉 Congratulations!</h3>
-                            <p id="completion-text"></p>
-                        </div>
+                    <div class="terminal-title">aryan@portfolio:~</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div id="terminalOutput" class="terminal-output"></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">aryan@portfolio:~$</span>
+                        <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" autofocus>
                     </div>
                 </div>
+                <div class="terminal-scanline"></div>
             </div>
         </div>
     </section>

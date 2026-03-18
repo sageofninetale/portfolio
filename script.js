@@ -983,169 +983,117 @@ if (contactForm) {
     });
 }
 
-// Easter Egg Hunt Game
-const easterEggGame = {
-    totalStars: 10,
-    foundStars: 0,
-    starPositions: [],
-    gameStarted: false,
-    
+// ─── Terminal Easter Egg ───────────────────────────────────────────────────────
+const terminal = {
+    output: null,
+    input: null,
+    body: null,
+    isTyping: false,
+
+    commands: {
+        help: "Available commands:\n<span style='color:#00ff41'>help, skills, experience, projects, hire, fun, arsenal, clear, whoami</span>",
+        skills: "Power BI · SQL · Python · DAX · Azure · FastAPI · React · LangGraph · OpenAI API · Supabase",
+        experience: "Cloudnine IT Services (2025 - Present)\nSouthern Housing (2023 - 2024)\nFiverr (2021 - 2022)\nGlorydale (2021 - 2022)",
+        projects: "<a href='#projects' style='color:#00d4ff; text-decoration:underline;'>Cascade AI</a>\n<a href='#projects' style='color:#00d4ff; text-decoration:underline;'>AXIO</a>\n<a href='#projects' style='color:#00d4ff; text-decoration:underline;'>Savora</a>\n<a href='#projects' style='color:#00d4ff; text-decoration:underline;'>Silver Lining</a>",
+        hire: "Smart move. Reach me at aryansubhash20@gmail.com — let's build something.",
+        fun: "I once built an entire AI healthcare system in 48 hours for a hackathon. Still running.",
+        arsenal: "We go again. Always. ⚽🔴",
+        whoami: "Aryan Subhash. Analyst by profession. AI builder by passion."
+    },
+
     init() {
-        this.setupButtons();
-    },
-    
-    setupButtons() {
-        const yesBtn = document.getElementById('play-yes');
-        const noBtn = document.getElementById('play-no');
-        
-        if (yesBtn) {
-            yesBtn.addEventListener('click', () => this.startGame());
-        }
-        
-        if (noBtn) {
-            noBtn.addEventListener('click', () => this.declineGame());
-        }
-    },
-    
-    startGame() {
-        if (this.gameStarted) return;
-        
-        this.gameStarted = true;
-        
-        // Hide prompt, show game content
-        const prompt = document.getElementById('game-prompt');
-        const content = document.getElementById('game-content');
-        
-        if (prompt) prompt.style.display = 'none';
-        if (content) content.classList.remove('hidden');
-        
-        // Create stars after a short delay
-        setTimeout(() => {
-            this.createStars();
-            this.updateScore();
-        }, 500);
-    },
-    
-    declineGame() {
-        const prompt = document.getElementById('game-prompt');
-        if (prompt) {
-            prompt.innerHTML = '<p class="prompt-question" style="color: var(--gold-color);">Maybe next time! 😊</p>';
-        }
-    },
-    
-    createStars() {
-        // Define sections where eggs can appear (excluding 'home')
-        const sections = [
-            'about', 'resume', 'work', 
-            'projects', 'skills'
-        ];
-        
-        sections.forEach((sectionId, index) => {
-            const section = document.getElementById(sectionId);
-            if (!section) return;
-            
-            // Calculate how many eggs per section (distribute evenly)
-            const starsPerSection = Math.floor(this.totalStars / sections.length);
-            const extraStars = index < (this.totalStars % sections.length) ? 1 : 0;
-            const starsToPlace = starsPerSection + extraStars;
-            
-            for (let i = 0; i < starsToPlace; i++) {
-                this.createStar(section);
+        this.output = document.getElementById('terminalOutput');
+        this.input = document.getElementById('terminalInput');
+        this.body = document.getElementById('terminalBody');
+
+        if (!this.output || !this.input) return;
+
+        // Ensure focus stays on input when clicking terminal
+        this.body.addEventListener('click', () => {
+            // Only focus if text is not being selected
+            if (window.getSelection().toString() === '') {
+                this.input.focus();
             }
         });
-    },
-    
-    createStar(section) {
-        const star = document.createElement('div');
-        star.className = 'easter-egg-star';
-        star.innerHTML = '🥚';
-        star.setAttribute('role', 'button');
-        star.setAttribute('aria-label', 'Hidden golden egg');
-        
-        // Random position within the section
-        const sectionRect = section.getBoundingClientRect();
-        const randomTop = Math.random() * 80 + 10; // 10-90% from top
-        const randomLeft = Math.random() * 90 + 5; // 5-95% from left
-        
-        star.style.top = `${randomTop}%`;
-        star.style.left = `${randomLeft}%`;
-        
-        // Add click handler
-        star.addEventListener('click', () => this.collectStar(star));
-        
-        section.style.position = 'relative';
-        section.appendChild(star);
-    },
-    
-    collectStar(star) {
-        if (star.classList.contains('collected')) return;
-        
-        star.classList.add('collected');
-        this.foundStars++;
-        this.updateScore();
-        
-        // Play collection sound effect (visual feedback)
-        star.style.pointerEvents = 'none';
-        
-        setTimeout(() => {
-            star.remove();
-        }, 600);
-        
-        // Check if all stars collected
-        if (this.foundStars === this.totalStars) {
-            this.showCompletionMessage();
-        }
-    },
-    
-    updateScore() {
-        const scoreElement = document.getElementById('score');
-        if (scoreElement) {
-            scoreElement.textContent = `${this.foundStars}/${this.totalStars}`;
-        }
-    },
-    
-    showCompletionMessage() {
-        const messageBox = document.getElementById('completion-message');
-        const messageText = document.getElementById('completion-text');
-        
-        if (messageBox && messageText) {
-            let message = '';
-            
-            if (this.foundStars === this.totalStars) {
-                message = `You found ${this.foundStars}/${this.totalStars} golden eggs — looks like you pay attention to detail! 👀 This skill is exactly what makes great work happen.`;
+
+        this.input.addEventListener('keydown', (e) => this.handleInput(e));
+
+        // Initial boot sequence observer (run once when scrolled into view)
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                observer.disconnect();
+                setTimeout(() => this.bootSequence(), 500);
             }
-            
-            messageText.textContent = message;
-            messageBox.classList.remove('hidden');
-            
-            // Scroll to show the message
-            messageBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, { threshold: 0.5 });
+        
+        const termSection = document.getElementById('game');
+        if (termSection) observer.observe(termSection);
+    },
+
+    async bootSequence() {
+        this.input.disabled = true;
+        await this.typeLines([
+            "> Initialising Aryan's system...",
+            "> Access granted. Type 'help' to explore."
+        ]);
+        this.input.disabled = false;
+        this.input.focus();
+    },
+
+    async handleInput(e) {
+        if (e.key !== 'Enter' || this.isTyping) return;
+
+        const val = this.input.value.trim();
+        if (!val) return;
+
+        // Echo command
+        const promptLine = document.createElement('div');
+        promptLine.innerHTML = `<span style="color:#00ff41">aryan@portfolio:~$</span> ${val}`;
+        this.output.appendChild(promptLine);
+        
+        this.input.value = '';
+        this.input.disabled = true;
+        this.scrollToBottom();
+
+        const lowerVal = val.toLowerCase();
+
+        if (lowerVal === 'clear') {
+            this.output.innerHTML = '';
+        } else {
+            const response = this.commands[lowerVal] || `command not found: ${val}. Type 'help' for available commands.`;
+            // Split by newline if it's a multiline string
+            const lines = response.split('\n');
+            await this.typeLines(lines, 30);
         }
+
+        this.input.disabled = false;
+        this.input.focus();
+        this.scrollToBottom();
+    },
+
+    async typeLines(lines, delayPerLine = 300) {
+        this.isTyping = true;
+        for (let i = 0; i < lines.length; i++) {
+            const lineDiv = document.createElement('div');
+            lineDiv.innerHTML = lines[i];
+            this.output.appendChild(lineDiv);
+            this.scrollToBottom();
+            
+            if (i < lines.length - 1) {
+                await new Promise(r => setTimeout(r, delayPerLine));
+            }
+        }
+        this.isTyping = false;
+    },
+
+    scrollToBottom() {
+        this.body.scrollTop = this.body.scrollHeight;
     }
 };
 
-// Initialize the game when page loads
 window.addEventListener('load', () => {
-    easterEggGame.init();
+    terminal.init();
 });
-
-// Skills Section Toggle
-const skillsToggleBtn = document.getElementById('skills-toggle-btn');
-const skillsFullList = document.getElementById('skills-full-list');
-
-if (skillsToggleBtn && skillsFullList) {
-    skillsToggleBtn.addEventListener('click', () => {
-        skillsFullList.classList.toggle('hidden');
-        skillsToggleBtn.classList.toggle('active');
-        
-        const btnText = skillsToggleBtn.querySelector('span');
-        if (skillsFullList.classList.contains('hidden')) {
-            btnText.textContent = 'Show Full Skill List';
-        } else {
-            btnText.textContent = 'Hide Full Skill List';
-        }
-    });
-}
 
 // Resume Download Handler
 const downloadBtn = document.querySelector('.download-btn');
