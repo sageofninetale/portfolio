@@ -222,11 +222,11 @@ body {
 .hero-heading {
     max-width: 100%;
     white-space: nowrap;
-    font-family: 'Lora', serif;
-    font-style: italic;
+    font-family: 'Outfit', sans-serif;
     font-size: clamp(32px, 5.5vw, 64px);
-    line-height: 1.28;
-    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    font-weight: 700;
     background: linear-gradient(144.5deg, #ffffff 0%, rgba(255,255,255,0.4) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
