@@ -334,17 +334,267 @@
             <h2 class="section-title">Projects</h2>
             <p class="section-subtitle">Professional work and client deliverables</p>
 
-            <!-- Filter Chips -->
-            <div class="project-filters" id="projectFilters">
-                <button class="filter-chip active" data-filter="all">ALL</button>
-                <button class="filter-chip" data-filter="data">DATA/BI</button>
-                <button class="filter-chip" data-filter="ai">AI/ML</button>
-                <button class="filter-chip" data-filter="finance">FINANCE</button>
-                <button class="filter-chip" data-filter="web">WEB</button>
+            <!-- Tier 1: Featured Projects -->
+            <div class="projects-tier">
+                <h3 class="tier-title">Featured Projects</h3>
+                <div class="projects-grid featured-grid">
+
+                    <!-- Featured 1: Cascade AI -->
+                    <div class="project-card featured-card">
+                        <a href="cascade-ai.html" class="project-full-link" aria-label="View Cascade AI Project Page"></a>
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/cascade-ai.png" alt="Cascade AI" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Personal Project</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">Cascade AI</h4>
+                            <p class="project-desc">Multi-agent AI system automating clinical handovers.</p>
+                            <div class="project-tech">
+                                <span>Azure OpenAI</span><span>FastAPI</span><span>LangGraph</span><span>MCP</span><span>Python</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/aryansubhash/cascade-ai" class="project-cta cta-github" aria-label="GitHub Repository"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 2: AXIO -->
+                    <div class="project-card featured-card">
+                        <a href="axio.html" class="project-full-link" aria-label="View AXIO Project Page"></a>
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/axio.png" alt="AXIO" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Personal Project</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">AXIO</h4>
+                            <p class="project-desc">AI documentation platform for physiotherapists.</p>
+                            <div class="project-tech">
+                                <span>React</span><span>OpenAI API</span><span>FastAPI</span><span>Supabase</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/aryansubhash/axio" class="project-cta cta-github" aria-label="GitHub Repository"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 3: Savora -->
+                    <div class="project-card featured-card">
+                        <a href="savora.html" class="project-full-link" aria-label="View Savora Project Page"></a>
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/savora.png" alt="Savora" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Personal Product</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">Savora</h4>
+                            <p class="project-desc">AI nutrition platform with fridge photo ingredient detection and meal planning.</p>
+                            <div class="project-tech">
+                                <span>Next.js</span><span>OpenAI API</span><span>Vercel</span><span>Tailwind CSS</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://savora-479460496934.us-west1.run.app/" class="project-cta cta-live" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured 4: Silver Lining Advisory -->
+                    <div class="project-card featured-card">
+                        <a href="silver-lining.html" class="project-full-link" aria-label="View Silver Lining Advisory Project Page"></a>
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/silver-lining.png" alt="Silver Lining Advisory" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Freelance Client</span>
+                                <span class="project-category badge-web">WEB</span>
+                            </div>
+                            <h4 class="project-title">Silver Lining Advisory</h4>
+                            <p class="project-desc">Full freelance website for Australian financial advisory firm.</p>
+                            <div class="project-tech">
+                                <span>Next.js</span><span>Vercel</span><span>GoDaddy DNS</span><span>GA4</span><span>Microsoft Clarity</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="#" class="project-cta cta-live" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <!-- Bento Grid Layout (dynamically generated) -->
-            <div class="bento-grid" id="bentoGrid"></div>
+            <!-- Tier 2: Other Work -->
+            <div class="projects-tier">
+                <h3 class="tier-title">Other Work</h3>
+                <div class="projects-grid other-grid">
+
+                    <!-- Other 1 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/network-rail.png" alt="Route Performance" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Network Rail</span>
+                                <span class="project-category badge-data">DATA/BI</span>
+                            </div>
+                            <h4 class="project-title">Route Performance: Delay Insights</h4>
+                            <p class="project-desc">Dashboard tracking UK railway station accessibility.</p>
+                            <div class="project-tech">
+                                <span>Power BI</span><span>SQL</span><span>Python</span><span>Excel</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-cta cta-case-study"><i class="fas fa-file-alt"></i> Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 2 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/retail-insights.png" alt="Sales, Cancellations & Margins" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Retail Insights</span>
+                                <span class="project-category badge-data">DATA/BI</span>
+                            </div>
+                            <h4 class="project-title">Sales, Cancellations & Margins</h4>
+                            <p class="project-desc">Sales forecasting platform with 92% accuracy.</p>
+                            <div class="project-tech">
+                                <span>Tableau</span><span>SQL</span><span>Python</span><span>R</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-cta cta-case-study"><i class="fas fa-file-alt"></i> Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 3 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/southern-housing.png" alt="AI Chatbot" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Southern Housing Group</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">AI Chatbot: Human-Centric Approach</h4>
+                            <p class="project-desc">RAG-based tenant support chatbot using company policy documents.</p>
+                            <div class="project-tech">
+                                <span>OpenAI API</span><span>Python</span><span>Azure</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-cta cta-case-study"><i class="fas fa-file-alt"></i> Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 4 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/jp-morgan.png" alt="Crypto & Mutual Funds" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">JP Morgan Chase</span>
+                                <span class="project-category badge-finance">FINANCE</span>
+                            </div>
+                            <h4 class="project-title">Crypto & Mutual Funds as Inflation Hedges</h4>
+                            <p class="project-desc">Consultancy project on portfolio diversification and credit risk.</p>
+                            <div class="project-tech">
+                                <span>Python</span><span>R</span><span>SQL</span><span>Excel</span><span>Bloomberg Terminal</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-cta cta-case-study"><i class="fas fa-file-alt"></i> Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 5 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/nudge.png" alt="Nudge — AI Habit Tracker" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Personal Project</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">Nudge — AI Habit Tracker</h4>
+                            <p class="project-desc">ML-powered habit formation and wellness coaching app.</p>
+                            <div class="project-tech">
+                                <span>Next.js</span><span>OpenAI API</span><span>Supabase</span><span>Tailwind CSS</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/aryansubhash/nudge" class="project-cta cta-github" aria-label="GitHub Repository"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 6 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/kineticiq.png" alt="KineticIQ" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">Healthcare AI</span>
+                                <span class="project-category badge-ai">AI/ML</span>
+                            </div>
+                            <h4 class="project-title">KineticIQ — AI for Physiotherapists</h4>
+                            <p class="project-desc">Custom GPT for biomechanics tracking and injury prevention.</p>
+                            <div class="project-tech">
+                                <span>OpenAI GPT-4</span><span>Python</span><span>TensorFlow</span><span>React</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/aryansubhash/kineticiq" class="project-cta cta-github" aria-label="GitHub Repository"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other 7 -->
+                    <div class="project-card">
+                        <div class="project-img-wrapper">
+                            <img src="images/projects/urbanfuel.png" alt="7-Year Financial Forecasting Model" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-client">UrbanFuel Coffee Ltd</span>
+                                <span class="project-category badge-finance">FINANCE</span>
+                            </div>
+                            <h4 class="project-title">7-Year Financial Forecasting Model</h4>
+                            <p class="project-desc">Expansion projection model for 15+ coffee locations.</p>
+                            <div class="project-tech">
+                                <span>Excel</span><span>Python</span><span>Tableau</span>
+                            </div>
+                            <div class="project-footer">
+                                <span class="project-cta cta-case-study"><i class="fas fa-file-alt"></i> Case Study</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </section>
 

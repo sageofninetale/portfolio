@@ -1691,20 +1691,7 @@ section:not(.hero) {
         grid-template-columns: 1fr;
     }
 
-    /* Bento grid responsive */
-    .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 240px;
-    }
-
-    .bento-large {
-        grid-column: span 2;
-    }
-
-    .bento-medium {
-        grid-column: span 1;
-    }
-}
+    /* Removed old bento grid responsive CSS */
 
 @media (max-width: 640px) {
     .section {
@@ -1731,34 +1718,7 @@ section:not(.hero) {
         grid-template-columns: 1fr;
     }
 
-    /* Bento grid mobile */
-    .bento-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 260px;
-        gap: 0.75rem;
-    }
-
-    .bento-large,
-    .bento-medium {
-        grid-column: span 1;
-    }
-
-    .bento-label {
-        padding: 1.25rem;
-    }
-
-    .bento-label h4 {
-        font-size: 1.1rem;
-    }
-
-    .project-modal-content {
-        padding: 2rem;
-        margin: 1rem;
-    }
-
-    .project-modal-title {
-        font-size: 1.5rem;
-    }
+    /* Removed old bento grid mobile CSS */
 }
 
 /* Enhanced Interactive Animations */
@@ -1907,493 +1867,256 @@ footer a {
     border-radius: 4px;
 }
 
-/* Bento Grid Projects Layout */
 /* ============================================
-   PROJECTS SECTION - BENTO GRID + MODAL
+   PROJECTS SECTION - TWO TIER
    ============================================ */
 
-/* Project Filters */
-.project-filters {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 2rem auto 3rem;
-    max-width: 800px;
+.projects-tier {
+    margin-bottom: 5rem;
 }
 
-.filter-chip {
-    padding: 0.625rem 1.5rem;
-    background: transparent;
-    border: 2px solid rgba(201, 169, 97, 0.3);
-    border-radius: 50px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.tier-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.5px;
 }
 
-.filter-chip:hover {
-    background: rgba(201, 169, 97, 0.1);
-    border-color: rgba(201, 169, 97, 0.6);
-    color: #e8e8e8;
-}
-
-.filter-chip.active {
-    background: var(--gold-color);
-    border-color: var(--gold-color);
-    color: #1a1a1a;
-}
-
-/* Bento Grid - Perfect Alignment */
-.bento-grid {
+.projects-grid {
     display: grid;
+    gap: 1.5rem;
+}
+
+.featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.other-grid {
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 280px;
-    grid-auto-flow: dense;
-    gap: 1rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0;
 }
 
-.bento-tile {
+.project-card {
     position: relative;
-    border-radius: 10px;
+    background: #0d1628;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    background: #1a1a1a;
-    border: none;
-    width: 100%;
-    height: 100%;
-}
-
-.bento-tile:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(201, 169, 97, 0.2);
-}
-
-.bento-tile:hover .bento-hover-overlay {
-    opacity: 1;
-}
-
-.bento-tile:hover .bento-bg {
-    transform: scale(1.05);
-}
-
-/* Tile sizes for bento layout */
-.bento-span-2x1 {
-    grid-column: span 2;
-    grid-row: span 1;
-}
-
-.bento-span-1x2 {
-    grid-row: span 2;
-    grid-column: span 1;
-}
-
-.bento-span-2x2 {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.bento-large {
-    grid-column: span 2;
-    grid-row: span 1;
-}
-
-.bento-medium {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.bento-medium {
-    grid-column: span 1;
-}
-
-/* Background image - perfect fit */
-.bento-bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Base overlay gradient */
-.bento-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.3) 50%,
-            rgba(0, 0, 0, 0.8) 100%);
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-/* Hover overlay with description */
-.bento-hover-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.5) 0%,
-            rgba(0, 0, 0, 0.85) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    z-index: 3;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0; /* for GSAP */
+    transform: translateY(30px); /* for GSAP */
 }
 
-.bento-hover-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    margin: 0 0 0.75rem 0;
-    line-height: 1.2;
+/* Base Hover Effect: Lift + Cyan Glow */
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(0, 212, 255, 0.08),
+        0 0 20px rgba(0, 212, 255, 0.15);
 }
 
-.bento-hover-desc {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Label at bottom (visible without hover) */
-.bento-label {
+.project-full-link {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1.25rem;
-    z-index: 2;
-    color: white;
-}
-
-.bento-label h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 0.4rem 0;
-    color: white;
-    line-height: 1.3;
-    transition: transform 0.3s ease;
-}
-
-.bento-category {
-    display: inline-block;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--gold-color);
-    font-weight: 600;
-}
-
-/* Expand-in-Place Content (INSIDE each tile) */
-.project-expand-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.98));
-    backdrop-filter: blur(12px);
-    padding: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-radius: 10px;
+    inset: 0;
     z-index: 10;
 }
 
-.bento-tile.is-expanded .project-expand-content {
-    opacity: 1;
-    pointer-events: all;
+.project-img-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
 }
 
-.bento-tile.is-expanded .bento-label {
-    opacity: 0;
+.featured-card .project-img-wrapper {
+    height: 260px; /* Slightly taller for featured */
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.05);
+}
+
+/* Gradient overlay fading to card bg */
+.project-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(13, 22, 40, 0) 40%, #0d1628 100%);
     pointer-events: none;
 }
 
-.bento-tile.is-expanded {
-    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.6);
-    z-index: 50;
-}
-
-.project-expand-inner {
-    height: 100%;
-    overflow-y: auto;
-    padding: 2rem 1.75rem;
+.project-content {
+    padding: 1.5rem 1.75rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-}
-
-.project-expand-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 100;
-}
-
-.project-expand-close:hover {
-    background: rgba(201, 169, 97, 0.3);
-    border-color: var(--gold-color);
-    color: var(--gold-color);
-    transform: rotate(90deg);
-}
-
-.project-expand-header {
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-}
-
-.project-expand-company {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--gold-color);
-    margin-bottom: 0.5rem;
-}
-
-.project-expand-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 0.75rem 0;
-    line-height: 1.2;
-}
-
-.project-expand-category {
-    display: inline-block;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 0.35rem 0.9rem;
-    background: rgba(201, 169, 97, 0.15);
-    border: 1px solid rgba(201, 169, 97, 0.3);
-    border-radius: 16px;
-    color: var(--gold-color);
-    margin-bottom: 0.75rem;
-}
-
-.project-expand-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0.75rem 0 0 0;
-}
-
-.project-expand-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     flex: 1;
 }
 
-.project-expand-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.project-expand-bullets li {
-    position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 0.85rem;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.project-expand-bullets li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--gold-color);
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.project-expand-actions {
+.project-header {
     display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin-top: auto;
-    padding-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
 }
 
-.project-expand-btn {
+.project-client {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.project-category {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+}
+
+.badge-ai {
+    color: #b58cff;
+    background: rgba(181, 140, 255, 0.1);
+    border: 1px solid rgba(181, 140, 255, 0.3);
+}
+
+.badge-data {
+    color: #4f8ef7;
+    background: rgba(79, 142, 247, 0.1);
+    border: 1px solid rgba(79, 142, 247, 0.3);
+}
+
+.badge-finance {
+    color: #c9a961;
+    background: rgba(201, 169, 97, 0.1);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+}
+
+.badge-web {
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.project-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.featured-card .project-title {
+    font-size: 1.5rem;
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+    margin: 0 0 1.25rem 0;
+    flex-grow: 1; /* Pushes tech and footer to bottom */
+}
+
+/* Tech pills */
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-tech span {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+}
+
+/* CTAs */
+.project-footer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1.75rem;
-    border-radius: 8px;
+    margin-top: auto;
+}
+
+.project-cta {
+    position: relative;
+    z-index: 20; /* Keep above the full-link overlay */
+    font-size: 0.85rem;
     font-weight: 600;
-    font-size: 0.875rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
-    white-space: nowrap;
-    cursor: pointer;
 }
 
-.project-expand-btn i {
-    font-size: 0.85rem;
+/* Clickable Buttons */
+.cta-live {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    border: 1px solid rgba(0, 212, 255, 0.3);
 }
 
-.project-expand-btn.primary {
-    background: var(--gold-color);
-    color: #1a1a1a;
-    border-color: var(--gold-color);
+.cta-live:hover {
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
 }
 
-.project-expand-btn.primary:hover:not(.disabled) {
-    background: #d4a574;
-    border-color: #d4a574;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(201, 169, 97, 0.4);
-}
-
-.project-expand-btn.secondary {
-    background: transparent;
+.cta-github {
+    background: rgba(255, 255, 255, 0.08);
     color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-github:hover {
+    background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.project-expand-btn.secondary:hover:not(.disabled) {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
+/* Non-Clickable Badge for Case Studies */
+.cta-case-study {
+    background: rgba(201, 169, 97, 0.05);
+    color: rgba(201, 169, 97, 0.7);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    cursor: default;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
 }
 
-.project-expand-btn.disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-
-/* Responsive adjustments for bento grid */
-@media (max-width: 968px) {
-    .bento-grid {
+/* Media Queries for New Projects Layout */
+@media (max-width: 1024px) {
+    .featured-grid,
+    .other-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 240px;
-        gap: 0.875rem;
-    }
-
-    .bento-large,
-    .bento-span-2x1 {
-        grid-column: span 2;
-    }
-
-    .bento-span-1x2,
-    .bento-span-2x2 {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-
-    .project-expand-inner {
-        padding: 1.75rem 1.5rem;
-    }
-
-    .project-expand-title {
-        font-size: 1.5rem;
     }
 }
 
-@media (max-width: 640px) {
-    .bento-grid {
+@media (max-width: 768px) {
+    .featured-grid,
+    .other-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: 260px;
-        gap: 0.75rem;
     }
+}
 
-    .bento-large,
-    .bento-span-2x1,
-    .bento-span-1x2,
-    .bento-span-2x2 {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-
-    .bento-label {
-        padding: 1rem;
-    }
-
-    .bento-label h4 {
-        font-size: 1rem;
-    }
-
-    .project-filters {
-        gap: 0.5rem;
-        margin: 1.5rem auto 2rem;
-    }
-
-    .filter-chip {
-        padding: 0.5rem 1.25rem;
-        font-size: 0.8rem;
-    }
-
-    .project-expand-inner {
-        padding: 1.5rem 1.25rem;
-    }
-
-    .project-expand-close {
-        top: 0.85rem;
-        right: 0.85rem;
-        width: 34px;
-        height: 34px;
-        font-size: 1rem;
-    }
-
-    .project-expand-title {
-        font-size: 1.35rem;
-    }
-
-    .project-expand-desc {
-        font-size: 0.875rem;
-    }
-
-    .project-expand-bullets li {
-        font-size: 0.825rem;
-    }
-
-    .project-expand-btn {
-        font-size: 0.85rem;
-        padding: 0.8rem 1.5rem;
-    }
 }
 
 /* ============================================
