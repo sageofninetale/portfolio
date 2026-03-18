@@ -87,62 +87,61 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text animate-on-scroll">
-                    <p class="lead">
-                        An analyst with 3 years of experience across fintech, housing, consulting, and IT services, I've
-                        built my career around making sense of complexity. I enjoy diving into messy datasets,
-                        understanding the systems behind them, and finding the logic that others miss. My strength lies
-                        in connecting the dots — blending technical analysis with strategic thinking to uncover insights
-                        that actually matter.
+                    <!-- Visible preview (2-3 lines) -->
+                    <p class="lead about-preview">
+                        I don't just analyze data — I obsess over the story it's hiding. With 3 years of experience across fintech, housing, consulting, and IT services, I've built a career on turning messy, complex information into clarity that actually drives decisions.
                     </p>
-                    <p class="lead">
-                        I've delivered work that improved data reliability, supported planning conversations, clarified
-                        performance, and helped teams make decisions with more confidence. Whether it's validating
-                        multi-source data, mapping processes, or refining KPIs, I approach every task with the goal of
-                        making information clearer, cleaner, and more useful.
-                    </p>
-                    <p class="lead">
-                        What I enjoy most is understanding how things work behind the scenes, and I'm naturally curious
-                        to dig deeper and learn more from the process.
-                    </p>
-                    <p class="lead">
-                        I love building small, useful products with AI — shipping fast, testing real-world ideas, and
-                        chasing that satisfying moment when something I built actually helps someone.
-                    </p>
-                    <p class="lead">
-                        Outside of work, I'm a massive Arsenal fan, and I never miss a chance to catch a match when I
-                        can.
-                    </p>
-                    <div class="about-details">
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Reading, UK</p>
+
+                    <!-- Expanded content hidden by default -->
+                    <div class="about-expanded" id="aboutExpanded">
+                        <p class="lead">
+                            I thrive in environments where the answers aren't obvious. The harder the problem, the more curious I get. I've validated multi-source datasets, mapped broken processes, rebuilt KPI frameworks from scratch, and supported business planning conversations where the stakes were real. Each challenge has made me sharper, more resilient, and more resourceful.
+                        </p>
+                        <p class="lead">
+                            Beyond the professional, I'm someone who builds things for the love of it. I prototype AI products, experiment with machine learning models, and ship fast — not because I have to, but because I genuinely love that moment when something I built actually helps someone.
+                        </p>
+                        <p class="lead">
+                            Outside of all that, I'm a die-hard Arsenal fan. The kind who knows every game matters, even when the season doesn't.
+                        </p>
+                        <div class="about-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Reading, UK</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+44 7776 606375</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>aryansubhash20@gmail.com</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="detail-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+44 7776 606375</p>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>aryansubhash20@gmail.com</p>
-                            </div>
-                        </div>
+                        <a href="documents/Aryan_Subhash_Resume.pdf" download="Aryan_Subhash_Resume.pdf"
+                            class="download-btn">
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
                     </div>
-                    <a href="documents/Aryan_Subhash_Resume.pdf" download="Aryan_Subhash_Resume.pdf"
-                        class="download-btn">
-                        <i class="fas fa-download"></i> Download Resume
-                    </a>
+
+                    <!-- Read More Toggle -->
+                    <button class="read-more-btn" id="readMoreBtn" onclick="toggleAbout()">
+                        <span id="readMoreLabel">Read More</span>
+                        <i class="fas fa-chevron-down" id="readMoreIcon"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Resume/Education Section -->
     <section id="resume" class="section alt-bg tunnel-section">

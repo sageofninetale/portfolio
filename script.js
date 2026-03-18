@@ -80,6 +80,19 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     });
 }
 
+// About Section Read More Toggle
+function toggleAbout() {
+    const expanded = document.getElementById('aboutExpanded');
+    const btn = document.getElementById('readMoreBtn');
+    const label = document.getElementById('readMoreLabel');
+    if (!expanded) return;
+
+    const isOpen = expanded.classList.contains('open');
+    expanded.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    label.textContent = isOpen ? 'Read More' : 'Read Less';
+}
+
 // Generate Sparkles for the Hero Overlay
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('sparkles-container');
