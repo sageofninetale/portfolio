@@ -146,8 +146,17 @@ body {
     padding: 0;
     position: relative;
     overflow: hidden;
-    background: url('hero-bg.jpg') center top/cover no-repeat fixed;
-    background-position: center 20%;
+    background: transparent;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .hero::before {
@@ -370,11 +379,11 @@ body {
 .section {
     padding: 6rem 2rem;
     position: relative;
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 0.6); /* 0.6 opacity to let 3D canvas show through */
 }
 
 .alt-bg {
-    background: #0f0f0f;
+    background: rgba(15, 15, 15, 0.6);
     position: relative;
 }
 
