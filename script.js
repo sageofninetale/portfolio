@@ -974,8 +974,6 @@ if (downloadBtn) {
 // 3D Background Setup (Three.js WebGL)
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // We must wait briefly if Three is loaded at the end of body, but it's executed sequentially so it's fine.
-    // However, wrap in a safety check.
     if (typeof THREE === 'undefined') return;
 
     const canvas = document.getElementById('bg-canvas');
@@ -983,47 +981,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0a0a0a, 0.015); // Dark fog
+    scene.fog = new THREE.FogExp2(0x000000, 0.012); // Pitch black deep fog
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 10;
+    camera.position.y = 2; // Look slightly down into the vortex
+    camera.lookAt(0, 0, -50);
     
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // optimize performance
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: false, antialias: true });
+    renderer.setClearColor(0x000000, 1); // Pure black background
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Create an abstract tech particle tunnel
+    // Create the Space Vortex using particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 3000;
+    const particlesCount = 15000; // Very dense
     
     const posArray = new Float32Array(particlesCount * 3);
+    const colorsArray = new Float32Array(particlesCount * 3);
+    
+    const colorDeepBlue = new THREE.Color(0x051b3d);
+    const colorCyan = new THREE.Color(0x00f2fe);
+    const colorWhite = new THREE.Color(0xffffff);
+    
     for(let i = 0; i < particlesCount; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const radius = 3 + Math.random() * 15; // Hollow center tunnel
-        const z = (Math.random() - 0.5) * 150;
+        // Depth parameter: 0 is far away, 1 is close to camera
+        const depth = Math.pow(Math.random(), 1.2); 
+        const z = -200 + (depth * 250); // From -200 deep inside to +50 towards us
         
-        posArray[i*3] = Math.cos(theta) * radius;     // x
-        posArray[i*3 + 1] = Math.sin(theta) * radius; // y
-        posArray[i*3 + 2] = z;                        // z
+        // Swirl pattern: angle grows as we go deeper
+        const angle = Math.random() * Math.PI * 2 + (depth * 15);
+        
+        // Funnel shape: radius expands drastically towards the camera
+        const radius = 3 + Math.pow(depth, 3) * 80; 
+        
+        // Scatter for volumetric 3D feel
+        const scatterRange = radius * 0.15;
+        const scatterX = (Math.random() - 0.5) * scatterRange;
+        const scatterY = (Math.random() - 0.5) * scatterRange;
+        
+        const x = Math.cos(angle) * radius + scatterX;
+        const y = Math.sin(angle) * radius + scatterY;
+        
+        posArray[i*3] = x;
+        posArray[i*3 + 1] = y;
+        posArray[i*3 + 2] = z;
+
+        // Assign colors randomly, favoring cyan/white closer to the rim
+        const mix = Math.random();
+        let selectedColor;
+        if (mix < 0.5) selectedColor = colorDeepBlue;
+        else if (mix < 0.9) selectedColor = colorCyan;
+        else selectedColor = colorWhite;
+
+        colorsArray[i*3] = selectedColor.r;
+        colorsArray[i*3 + 1] = selectedColor.g;
+        colorsArray[i*3 + 2] = selectedColor.b;
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
     
     // Techie particle material
     const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.05,
-        color: 0x00f2fe,
+        size: 0.12,
+        vertexColors: true,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.9,
         blending: THREE.AdditiveBlending
     });
     
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
+    const vortexMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(vortexMesh);
+
+    // Add some larger standalone stars in the background
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 500;
+    const starsPos = new Float32Array(starsCount * 3);
+    for(let i=0; i<starsCount*3; i++) {
+        starsPos[i] = (Math.random() - 0.5) * 400;
+    }
+    starsGeo.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2, transparent: true, opacity: 0.8 });
+    const starsMesh = new THREE.Points(starsGeo, starsMat);
+    scene.add(starsMesh);
 
     // Mouse movement interaction (subtle sway)
     let mouseX = 0;
     let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
     document.addEventListener('mousemove', (event) => {
         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
         mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -1036,7 +1083,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Scroll Handler affecting Camera
+    // Scroll Handler affecting vortex velocity
     let currentScroll = 0;
     window.addEventListener('scroll', () => {
         currentScroll = window.scrollY;
@@ -1044,22 +1091,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Animation Loop
     const clock = new THREE.Clock();
+    let oldTime = 0;
+    
     function animate() {
         requestAnimationFrame(animate);
         const elapsedTime = clock.getElapsedTime();
+        const deltaTime = elapsedTime - oldTime;
+        oldTime = elapsedTime;
 
-        // Rotate particle tunnel slowly
-        particlesMesh.rotation.z = elapsedTime * 0.05;
-        
-        // Gentle mouse parallax effect
-        camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
+        // Smoothly interpolate camera target based on mouse
+        targetX = mouseX * 2;
+        targetY = mouseY * 2;
+        camera.position.x += (targetX - camera.position.x) * 0.02;
+        camera.position.y += (targetY - camera.position.y + 2) * 0.02; // keeping base Y at 2
+        camera.lookAt(0, 0, -50);
 
-        // Camera scroll effect (move forward down the tunnel as you scroll)
-        // Multiply scroll by a factor so they travel smoothly through the Z axis
-        const scrollZ = 5 - (currentScroll * 0.015);
-        camera.position.z = scrollZ;
+        // Rotate particle tunnel slowly inwards
+        vortexMesh.rotation.z -= 0.0015;
+
+        // Simulate falling INTO the vortex by slowly moving points towards camera and resetting
+        const positions = vortexMesh.geometry.attributes.position.array;
         
+        // Base pull speed + scroll speed multiplier
+        const pullSpeed = 10 + (currentScroll * 0.05);
+
+        for(let i = 0; i < particlesCount; i++) {
+            // Move Z towards camera
+            positions[i*3 + 2] += pullSpeed * deltaTime;
+            
+            // If particle passes camera, send it deep back into the vortex hole
+            if (positions[i*3 + 2] > 20) {
+                positions[i*3 + 2] = -200 - Math.random() * 50;
+            }
+        }
+        vortexMesh.geometry.attributes.position.needsUpdate = true;
+        
+        // Slow star rotation
+        starsMesh.rotation.z += 0.0002;
+        starsMesh.rotation.y += 0.0001;
+
         renderer.render(scene, camera);
     }
     
