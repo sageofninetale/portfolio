@@ -220,11 +220,14 @@ body {
 }
 
 .hero-heading {
-    max-width: 613px;
-    font-size: 56px;
+    max-width: 100%;
+    white-space: nowrap;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(32px, 5.5vw, 64px);
     line-height: 1.28;
-    font-weight: 600;
-    background: linear-gradient(144.5deg, #ffffff 0%, rgba(255,255,255,0.3) 100%);
+    font-weight: 500;
+    background: linear-gradient(144.5deg, #ffffff 0%, rgba(255,255,255,0.4) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -256,7 +259,7 @@ body {
     }
     
     .hero-heading {
-        font-size: 36px;
+        font-size: clamp(28px, 6vw, 36px);
     }
 }
 
