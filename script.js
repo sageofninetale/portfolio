@@ -1,3 +1,85 @@
+// ─── GSAP Tunnel Camera Effect ────────────────────────────────────────────────
+// Simulates a space tunnel camera flying through sections on scroll
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Apply perspective to body for 3D depth
+    document.body.style.perspective = '1200px';
+
+    const tunnelSections = document.querySelectorAll('.tunnel-section');
+
+    tunnelSections.forEach((section) => {
+        // Set initial states so elements start from far away & invisible
+        gsap.set(section, { opacity: 0, scale: 0.7, transformOrigin: 'center center' });
+
+        // Entrance: elements fly toward camera as you scroll in
+        ScrollTrigger.create({
+            trigger: section,
+            start: 'top 90%',
+            end: 'top 20%',
+            scrub: 0.6,
+            onUpdate: (self) => {
+                const p = self.progress; // 0 to 1
+                gsap.to(section, {
+                    scale: 0.7 + p * 0.3,       // 0.7 → 1.0
+                    opacity: p,                  // 0 → 1
+                    duration: 0,
+                });
+            }
+        });
+
+        // Exit: fly past camera as you scroll away (gentle scale up + fade)
+        ScrollTrigger.create({
+            trigger: section,
+            start: 'bottom 80%',
+            end: 'bottom 10%',
+            scrub: 0.6,
+            onUpdate: (self) => {
+                const p = self.progress; // 0 to 1
+                gsap.to(section, {
+                    scale: 1 + p * 0.08,        // 1.0 → 1.08 (slight overshoot)
+                    opacity: 1 - p * 0.6,        // 1 → 0.4
+                    duration: 0,
+                });
+            }
+        });
+    });
+
+    // Also animate individual timeline cards for stagger entry
+    document.querySelectorAll('.tunnel-section .timeline-item').forEach((item, i) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            y: 50,
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: 'power3.out'
+        });
+    });
+
+    // Animate project cards
+    document.querySelectorAll('.tunnel-section .project-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            y: 60,
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.9,
+            delay: i * 0.1,
+            ease: 'power3.out'
+        });
+    });
+}
+
 // Generate Sparkles for the Hero Overlay
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('sparkles-container');
