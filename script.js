@@ -375,10 +375,10 @@ scrollProgress.style.cssText = `
     left: 0;
     width: 0%;
     height: 3px;
-    background: linear-gradient(90deg, #c9a961 0%, #d4a574 50%, #e6c896 100%);
+    background: linear-gradient(90deg, #0090bb 0%, #00d4ff 55%, #90e0ef 100%);
     z-index: 10001;
     transition: width 0.1s ease;
-    box-shadow: 0 0 10px rgba(201, 169, 97, 0.5);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.55);
 `;
 document.body.appendChild(scrollProgress);
 
@@ -388,116 +388,6 @@ window.addEventListener('scroll', () => {
     scrollProgress.style.width = scrolled + '%';
 });
 
-// Custom cursor effect
-const cursorDot = document.createElement('div');
-cursorDot.className = 'cursor-dot';
-document.body.appendChild(cursorDot);
-
-const cursorOutline = document.createElement('div');
-cursorOutline.className = 'cursor-outline';
-document.body.appendChild(cursorOutline);
-
-// Add cursor styles
-const cursorStyle = document.createElement('style');
-cursorStyle.textContent = `
-    .cursor-dot, .cursor-outline {
-        pointer-events: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        border-radius: 50%;
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        transition: opacity 0.3s ease, transform 0.15s ease-out;
-        z-index: 10000;
-    }
-    
-    .cursor-dot {
-        width: 8px;
-        height: 8px;
-        background: linear-gradient(135deg, #c9a961 0%, #d4a574 100%);
-        box-shadow: 0 0 10px rgba(201, 169, 97, 0.6);
-    }
-    
-    .cursor-outline {
-        width: 40px;
-        height: 40px;
-        border: 2px solid rgba(201, 169, 97, 0.4);
-    }
-    
-    @media (hover: hover) and (pointer: fine) {
-        .cursor-dot, .cursor-outline {
-            opacity: 1;
-        }
-    }
-    
-    @media (max-width: 968px) {
-        .cursor-dot, .cursor-outline {
-            display: none;
-        }
-    }
-    
-    /* Hide cursor when over Education section */
-    body.in-education .cursor-dot,
-    body.in-education .cursor-outline {
-        opacity: 0 !important;
-        display: none !important;
-    }
-`;
-document.head.appendChild(cursorStyle);
-
-let mouseX = 0, mouseY = 0;
-let cursorDotX = 0, cursorDotY = 0;
-let cursorOutlineX = 0, cursorOutlineY = 0;
-
-// Track when mouse enters/leaves Education section
-const educationSection = document.getElementById('resume');
-if (educationSection) {
-    educationSection.addEventListener('mouseenter', () => {
-        document.body.classList.add('in-education');
-    });
-    
-    educationSection.addEventListener('mouseleave', () => {
-        document.body.classList.remove('in-education');
-    });
-}
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-function animateCursor() {
-    cursorDotX += (mouseX - cursorDotX) * 0.8;
-    cursorDotY += (mouseY - cursorDotY) * 0.8;
-    
-    cursorOutlineX += (mouseX - cursorOutlineX) * 0.15;
-    cursorOutlineY += (mouseY - cursorOutlineY) * 0.15;
-    
-    cursorDot.style.left = cursorDotX + 'px';
-    cursorDot.style.top = cursorDotY + 'px';
-    
-    cursorOutline.style.left = cursorOutlineX + 'px';
-    cursorOutline.style.top = cursorOutlineY + 'px';
-    
-    requestAnimationFrame(animateCursor);
-}
-
-animateCursor();
-
-// Expand cursor on interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .skill-tag, .btn');
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
-});
 
 // ============================================
 // PROJECTS ANIMATIONS
@@ -505,30 +395,36 @@ interactiveElements.forEach(el => {
 
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     // Animate Featured Projects (Stagger fade up)
-    gsap.from('.featured-card', {
-        scrollTrigger: {
-            trigger: '.featured-grid',
-            start: 'top 85%'
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
-    });
+    gsap.fromTo('.featured-card',
+        { y: 40, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.featured-grid',
+                start: 'top 90%',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+        }
+    );
 
     // Animate Other Work Projects (Stagger fade up)
-    gsap.from('.other-grid .project-card', {
-        scrollTrigger: {
-            trigger: '.other-grid',
-            start: 'top 85%'
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out'
-    });
+    gsap.fromTo('.other-grid .project-card',
+        { y: 40, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.other-grid',
+                start: 'top 90%',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        }
+    );
 }
 
 // Add keyframe animations dynamically
