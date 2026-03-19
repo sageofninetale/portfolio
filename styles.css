@@ -290,11 +290,6 @@ body {
         letter-spacing: 0;
     }
 
-    /* Increase max-height so Location/Phone/Email aren't cut off on mobile */
-    .about-expanded.open {
-        max-height: 4000px;
-    }
-
     .web3-hero {
         padding-top: 200px;
         padding-left: 20px;
@@ -458,6 +453,14 @@ body::before {
 .about-expanded.open {
     max-height: 2000px;
     opacity: 1;
+}
+
+/* On mobile, text wraps much more so 2000px isn't enough — override here
+   (must be AFTER the global rule above so cascade order works correctly) */
+@media (max-width: 768px) {
+    .about-expanded.open {
+        max-height: 4000px;
+    }
 }
 
 .read-more-btn {
