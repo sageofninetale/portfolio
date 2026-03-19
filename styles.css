@@ -270,17 +270,37 @@ body {
     .web3-nav {
         padding: 20px 24px;
     }
-    
+
     .nav-links {
         display: none;
     }
-    
+
+    /* Hide social icons from nav on mobile — they're in the contact section */
+    .nav-social {
+        display: none;
+    }
+
+    /* Compact nav links so all 6 fit on small screens */
+    .nav-links-centered {
+        gap: 10px;
+    }
+
+    .nav-links-centered a {
+        font-size: 12px;
+        letter-spacing: 0;
+    }
+
+    /* Increase max-height so Location/Phone/Email aren't cut off on mobile */
+    .about-expanded.open {
+        max-height: 4000px;
+    }
+
     .web3-hero {
         padding-top: 200px;
         padding-left: 20px;
         padding-right: 20px;
     }
-    
+
     .hero-heading {
         font-size: clamp(28px, 6vw, 36px);
     }
