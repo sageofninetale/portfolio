@@ -153,6 +153,130 @@ body {
     box-shadow: 0 2px 10px 1px rgba(255,255,255,0.4);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Animated Neon Glow Button (Hero CTA)
+   ═══════════════════════════════════════════════════════════════ */
+.neon-glow-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5px; /* Thin border thickness like Lightswind */
+    border-radius: 9999px;
+    background: #000; /* Black rim to absorb shadow */
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    /* Snappy click press scale */
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+}
+
+.neon-glow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(77, 255, 255, 0.2);
+}
+
+.neon-glow-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(77, 255, 255, 0.1);
+}
+
+/* Magic Spinning Border - Full Rainbow Replication */
+.glow-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -150px;
+    /* Manual stops to exactly replicate Lightswind's "in hsl increasing hue" from Red to Pink */
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 20%,
+        #ff4d4d 30%,       /* Red */
+        #ff994d 36%,       /* Orange */
+        #e6ff4d 42%,       /* Yellow-Green */
+        #4dff4d 48%,       /* Green */
+        #4dffff 54%,       /* Cyan */
+        #4d4dff 60%,       /* Blue */
+        #cc4dff 66%,       /* Purple */
+        #ff4d8b 70%,       /* Pink/Magenta */
+        transparent 80%,
+        transparent 100%
+    );
+    animation: rotateGlow 2s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotateGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Inner Button Background */
+.neon-glow-btn .btn-content {
+    position: relative;
+    background: #0a0a0a; /* Sleek, pure dark grey for maximum contrast */
+    color: #fff;
+    min-width: 160px;
+    height: 48px;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.neon-glow-btn:hover .btn-content {
+    background: #111111; /* Slightly lighter on hover */
+}
+
+/* Text and Icon GSAP-style Snap Graphic Motion */
+.btn-text, .btn-icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Elastic bounce timing curve */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.btn-icon {
+    transform: translateY(-40px);
+    opacity: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-text {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* When active (clicked), slide text out and bounce icon in */
+.neon-glow-btn:active .btn-text {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+.neon-glow-btn:active .btn-icon {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
 /* Hero Section - Web3 Style */
 .video-background {
     position: fixed;
