@@ -427,6 +427,71 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     );
 }
 
+// ─── Featured Event Section ───────────────────────────────────────────────────
+(function initEventAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (!document.querySelector('.event-section')) return;
+
+    // Badge + headline + subline staggered entrance
+    gsap.fromTo('.event-badge',
+        { opacity: 0, y: 16, filter: 'blur(4px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: '.event-header', start: 'top 82%', toggleActions: 'play none none none' } }
+    );
+    gsap.fromTo('.event-headline',
+        { opacity: 0, y: 28, filter: 'blur(6px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.85, ease: 'power3.out', delay: 0.12,
+          scrollTrigger: { trigger: '.event-header', start: 'top 82%', toggleActions: 'play none none none' } }
+    );
+    gsap.fromTo('.event-subline',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.28,
+          scrollTrigger: { trigger: '.event-header', start: 'top 82%', toggleActions: 'play none none none' } }
+    );
+
+    // Backdrop photo — slides in from left with slight rotation
+    gsap.fromTo('.event-photo-backdrop-wrap',
+        { opacity: 0, x: -40, rotate: -1.5, scale: 0.97 },
+        { opacity: 1, x: 0, rotate: 0, scale: 1, duration: 1.0, ease: 'power3.out',
+          scrollTrigger: { trigger: '.event-photos', start: 'top 78%', toggleActions: 'play none none none' } }
+    );
+
+    // Selfie photo — slides in from right with delay
+    gsap.fromTo('.event-photo-selfie-wrap',
+        { opacity: 0, x: 40, rotate: 1.5, scale: 0.97 },
+        { opacity: 1, x: 0, rotate: 0, scale: 1, duration: 1.0, ease: 'power3.out', delay: 0.18,
+          scrollTrigger: { trigger: '.event-photos', start: 'top 78%', toggleActions: 'play none none none' } }
+    );
+
+    // Caption tags fade up after photos settle
+    gsap.fromTo('.event-photo-tag',
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12, delay: 0.6,
+          scrollTrigger: { trigger: '.event-photos', start: 'top 78%', toggleActions: 'play none none none' } }
+    );
+
+    // Stats row slides up
+    gsap.fromTo('.event-stats-row',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: '.event-stats-row', start: 'top 88%', toggleActions: 'play none none none' } }
+    );
+
+    // Gold number reveals left-to-right
+    gsap.fromTo('.event-stat-num',
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)', duration: 0.9, ease: 'power3.inOut', delay: 0.2,
+          scrollTrigger: { trigger: '.event-stats-row', start: 'top 88%', toggleActions: 'play none none none' } }
+    );
+
+    // Wordmark fades in from right
+    gsap.fromTo('.event-wordmark',
+        { opacity: 0, x: 16 },
+        { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', delay: 0.35,
+          scrollTrigger: { trigger: '.event-stats-row', start: 'top 88%', toggleActions: 'play none none none' } }
+    );
+})();
+
 // Add keyframe animations dynamically
 const animationStyles = document.createElement('style');
 animationStyles.textContent = `

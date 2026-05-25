@@ -858,6 +858,13 @@ body::before {
     box-shadow: 0 0 15px rgba(79, 142, 247, 0.2);
 }
 
+.stat-badge.stat-purple {
+    background: rgba(124, 58, 237, 0.2);
+    border: 1px solid rgba(124, 58, 237, 0.4);
+    color: #a78bfa;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+}
+
 /* Bullet list */
 .work-bullets {
     margin: 0;
@@ -2309,4 +2316,330 @@ footer a {
     .wave-signature text {
         font-size: 12px;
     }
+}
+
+/* ============================================
+   EVENT SECTION — Code with Claude London
+   ============================================ */
+
+.event-section {
+    background: #0a0a0f;
+    padding: 120px 0 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-section::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 212, 255, 0.06) 0%,
+        rgba(124, 58, 237, 0.04) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.event-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.event-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 100px;
+    padding: 6px 16px 6px 12px;
+    width: fit-content;
+    font-family: 'General Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #00d4ff;
+}
+
+.event-badge-dot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00d4ff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.9);
+    flex-shrink: 0;
+    animation: event-badge-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes event-badge-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(0, 212, 255, 0.9); opacity: 1; }
+    50%       { box-shadow: 0 0 16px rgba(0, 212, 255, 0.4); opacity: 0.7; }
+}
+
+.event-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(22px, 2.8vw, 38px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.event-subline {
+    font-family: 'General Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+}
+
+.event-highlight {
+    color: #00d4ff;
+    font-weight: 600;
+}
+
+.event-narrative {
+    font-family: 'General Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    border-left: 2px solid rgba(0, 212, 255, 0.3);
+    padding-left: 20px;
+}
+
+.event-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.event-highlight-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 212, 255, 0.04);
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    border-radius: 12px;
+    padding: 20px 22px;
+}
+
+.event-hl-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #00d4ff;
+}
+
+.event-hl-desc {
+    font-family: 'General Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 768px) {
+    .event-highlights { grid-template-columns: 1fr; }
+}
+
+/* ── Photos grid ─────────────────────────────── */
+
+.event-photos {
+    display: grid;
+    grid-template-columns: 60fr 40fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.event-photo-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(212, 165, 116, 0.25),
+        0 20px 60px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient fade above caption tag */
+.event-photo-wrap::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 15, 0.7) 100%);
+    border-radius: 0 0 16px 16px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Gold border inset overlay */
+.event-photo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 165, 116, 0.18);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.event-photo-img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.event-photo-backdrop-wrap { margin-top: 0; }
+
+.event-photo-backdrop {
+    height: 480px;
+    object-position: center 65%;
+}
+
+.event-photo-backdrop-wrap:hover .event-photo-img { transform: scale(1.03); }
+
+.event-photo-selfie-wrap { margin-top: 32px; }
+
+.event-photo-selfie {
+    height: 448px;
+    object-position: center 25%;
+}
+
+.event-photo-selfie-wrap:hover .event-photo-img { transform: scale(1.03); }
+
+/* Frosted glass caption tag */
+.event-photo-tag {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 4;
+    background: rgba(10, 10, 15, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-family: 'General Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+}
+
+/* ── Stats row ───────────────────────────────── */
+
+.event-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding-top: 32px;
+}
+
+.event-stat-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.event-stat-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #c9a961 0%, #d4a574 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.event-stat-sub {
+    font-family: 'General Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.01em;
+}
+
+.event-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.event-wordmark-label {
+    font-family: 'General Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.event-wordmark-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Responsive ──────────────────────────────── */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .event-photo-backdrop { height: 420px; }
+    .event-photo-selfie   { height: 390px; }
+    .event-headline       { font-size: 40px; }
+}
+
+@media (max-width: 768px) {
+    .event-section  { padding: 80px 0 100px; }
+    .event-inner    { gap: 32px; }
+    .event-photos   { grid-template-columns: 1fr; gap: 16px; }
+    .event-photo-selfie-wrap { margin-top: 0; }
+    .event-photo-backdrop,
+    .event-photo-selfie { height: 360px; }
+    .event-stats-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .event-wordmark  { align-items: flex-start; }
+    .event-stat-num  { font-size: 22px; }
+}
+
+/* ============================================
+   END EVENT SECTION
+   ============================================ */
 }
