@@ -57,7 +57,7 @@
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#work">Work</a>
-            <a href="#projects">Projects</a>
+            <a href="#projects">Labs</a>
             <a href="#event">Event</a>
             <a href="#game">Terminal</a>
             <a href="#contact">Contact</a>
@@ -85,7 +85,7 @@
             <a href="#projects" class="neon-glow-btn cta-btn" aria-label="View Projects">
                 <span class="glow-border"></span>
                 <span class="btn-content">
-                    <span class="btn-text">View Projects</span>
+                    <span class="btn-text">Enter the Lab</span>
                     <span class="btn-icon">↓</span>
                 </span>
             </a>
@@ -351,21 +351,20 @@
     <!-- Projects Section -->
     <section id="projects" class="section alt-bg">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <p class="section-subtitle">Professional work and client deliverables</p>
+            <h2 class="section-title">Labs</h2>
+            <p class="section-subtitle">Ranked by recognition, impact, and real-world deployment</p>
 
-            <!-- Tier 1: Featured Projects -->
+            <!-- Tier 1: Hackathon Recognised -->
             <div class="projects-tier">
-                <h3 class="tier-title">Featured Projects</h3>
+                <h3 class="tier-title"><span class="tier-label-t1">T1</span> Hackathon Recognised</h3>
                 <div class="projects-grid featured-grid">
 
-                    <!-- Featured 1: Cascade AI -->
                     <div class="project-card featured-card">
-                        <a href="https://www.cascadeaicare.com/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Cascade AI Live Demo"></a>
+                        <a href="https://www.cascadeaicare.com/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Cascade AI"></a>
                         <div class="project-img-wrapper grad-cascade-ai">
                             <img src="images/projects/cascade-ai.png?v=8" alt="Cascade AI" class="project-img" loading="lazy">
                             <div class="project-img-overlay"></div>
-                            <span style="position:absolute;top:12px;right:12px;background:rgba(0,120,212,0.92);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:0.5px;z-index:2;text-transform:uppercase;backdrop-filter:blur(4px);">🏆 Top Finalist Microsoft Hackathon</span>
+                            <span style="position:absolute;top:12px;right:12px;background:rgba(0,120,212,0.92);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:0.5px;z-index:2;text-transform:uppercase;backdrop-filter:blur(4px);">🏆 Microsoft AI Dev Days + Anthropic</span>
                         </div>
                         <div class="project-content">
                             <div class="project-header">
@@ -373,19 +372,18 @@
                                 <span class="project-client">Founder</span>
                             </div>
                             <h4 class="project-title">Cascade AI</h4>
-                            <p class="project-desc">Multi-agent AI system automating clinical handovers.</p>
+                            <p class="project-desc">Multi-agent AI system automating clinical handovers — recognised at Microsoft AI Dev Days 2026 and Anthropic Code with Claude London.</p>
                             <div class="project-tech">
                                 <span>Azure OpenAI</span><span>FastAPI</span><span>LangGraph</span><span>MCP</span><span>Python</span>
                             </div>
                             <div class="project-footer">
-                                <a href="https://www.cascadeaicare.com/" class="project-cta cta-live" target="_blank" rel="noopener" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="https://www.cascadeaicare.com/" class="project-cta cta-live" target="_blank" rel="noopener" aria-label="Website"><i class="fas fa-external-link-alt"></i> Website</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Featured 2: AXIO -->
                     <div class="project-card featured-card">
-                        <a href="https://axio-two.vercel.app/" class="project-full-link" target="_blank" rel="noopener" aria-label="View AXIO Live Demo"></a>
+                        <a href="https://axio-two.vercel.app/" class="project-full-link" target="_blank" rel="noopener" aria-label="View AXIO"></a>
                         <div class="project-img-wrapper grad-axio">
                             <img src="images/projects/axio.png" alt="AXIO" class="project-img" loading="lazy">
                             <div class="project-img-overlay"></div>
@@ -407,9 +405,17 @@
                         </div>
                     </div>
 
-                    <!-- Featured 3: Savora -->
+                </div>
+            </div>
+
+            <!-- Tier 2: Deployed Products -->
+            <div class="projects-tier">
+                <h3 class="tier-title"><span class="tier-label-t2">T2</span> Deployed Products</h3>
+                <div class="projects-grid featured-grid">
+
                     <div class="project-card featured-card">
-                        <a href="https://savora-479460496934.us-west1.run.app/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Savora Live Demo"></a>
+                        <a href="https://savora-479460496934.us-west1.run.app/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Savora"></a>
+
                         <div class="project-img-wrapper grad-savora">
                             <img src="images/projects/savora.png" alt="Savora" class="project-img" loading="lazy">
                             <div class="project-img-overlay"></div>
@@ -430,9 +436,8 @@
                         </div>
                     </div>
 
-                    <!-- Featured 4: Silver Lining Advisory -->
                     <div class="project-card featured-card">
-                        <a href="https://www.silverlining.net.au/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Silver Lining Advisory Live Demo"></a>
+                        <a href="https://www.silverlining.net.au/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Silver Lining Advisory"></a>
                         <div class="project-img-wrapper grad-silver-lining">
                             <img src="images/projects/silver-lining.png" alt="Silver Lining Advisory" class="project-img" loading="lazy">
                             <div class="project-img-overlay"></div>
@@ -454,60 +459,37 @@
                     </div>
 
                 </div>
+                <div class="projects-grid other-grid" style="margin-top:1rem;">
+                    <div class="project-card">
+                        <a href="http://18.175.211.123:8501" class="project-full-link" target="_blank" rel="noopener" aria-label="View Rivalyze Live Demo"></a>
+                        <div class="project-img-wrapper grad-rivalyze">
+                            <img src="images/projects/rivalyze.jpeg" alt="Rivalyze" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-ai">AI/ML</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">Rivalyze</h4>
+                            <p class="project-desc">Enter two company names and get a full competitive analysis with live web citations in under 60 seconds. Built with LangGraph multi-agent pipelines, FastAPI, Docker, and deployed on AWS EC2.</p>
+                            <div class="project-tech">
+                                <span>LangGraph</span><span>FastAPI</span><span>Docker</span><span>AWS EC2</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/sageofninetale/rivalyze" class="project-cta cta-case-study" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="http://18.175.211.123:8501" class="project-cta cta-live" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Tier 2: Other Work -->
+            <!-- Tier 3: AI/ML Projects -->
             <div class="projects-tier">
-                <h3 class="tier-title">Other Work</h3>
+                <h3 class="tier-title"><span class="tier-label-t3">T3</span> AI / ML Projects</h3>
                 <div class="projects-grid other-grid">
 
-                    <!-- Other 1 -->
-                    <div class="project-card">
-                        <a href="https://drive.google.com/drive/folders/1BsJLbU3wwp6x_HsDhpWfP2p06iBt5eO7?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Route Performance Case Study"></a>
-                        <div class="project-img-wrapper grad-network-rail">
-                            <img src="images/projects/network-rail.png" alt="Route Performance" class="project-img" loading="lazy">
-                            <div class="project-img-overlay"></div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-header">
-                                <span class="project-category badge-data">DATA/BI</span>
-                                <span class="project-client">Network Rail</span>
-                            </div>
-                            <h4 class="project-title">Route Performance: Delay Insights</h4>
-                            <p class="project-desc">Dashboard tracking UK railway station accessibility.</p>
-                            <div class="project-tech">
-                                <span>Power BI</span><span>SQL</span><span>Python</span><span>Excel</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://drive.google.com/drive/folders/1BsJLbU3wwp6x_HsDhpWfP2p06iBt5eO7?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Other 2 -->
-                    <div class="project-card">
-                        <a href="https://drive.google.com/drive/folders/1b1CwM9ydQLgkir6Qgd0GNa1K7Gw7Rwz0?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Sales Insights Case Study"></a>
-                        <div class="project-img-wrapper grad-retail-insights">
-                            <img src="images/projects/retail-insights.png" alt="Sales, Cancellations & Margins" class="project-img" loading="lazy">
-                            <div class="project-img-overlay"></div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-header">
-                                <span class="project-category badge-data">DATA/BI</span>
-                                <span class="project-client">Retail Insights</span>
-                            </div>
-                            <h4 class="project-title">Sales, Cancellations & Margins</h4>
-                            <p class="project-desc">Sales forecasting platform with 92% accuracy.</p>
-                            <div class="project-tech">
-                                <span>Tableau</span><span>SQL</span><span>Python</span><span>R</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://drive.google.com/drive/folders/1b1CwM9ydQLgkir6Qgd0GNa1K7Gw7Rwz0?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Other 3 -->
                     <div class="project-card">
                         <a href="https://drive.google.com/drive/folders/1lUrR8mh9CFlq935bLUeHDYYKILA0COyP?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View AI Chatbot Case Study"></a>
                         <div class="project-img-wrapper grad-southern-housing">
@@ -530,30 +512,6 @@
                         </div>
                     </div>
 
-                    <!-- Other 4 -->
-                    <div class="project-card">
-                        <a href="https://drive.google.com/drive/folders/1dyFLXyGfobFDZ1CO_NQF1Lgd3L93jJFS?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Crypto Research Case Study"></a>
-                        <div class="project-img-wrapper grad-jp-morgan">
-                            <img src="images/projects/jp-morgan.png" alt="Crypto & Mutual Funds" class="project-img" loading="lazy">
-                            <div class="project-img-overlay"></div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-header">
-                                <span class="project-category badge-finance">FINANCE</span>
-                                <span class="project-client">JP Morgan Chase</span>
-                            </div>
-                            <h4 class="project-title">Crypto & Mutual Funds as Inflation Hedges</h4>
-                            <p class="project-desc">Consultancy project on portfolio diversification and credit risk.</p>
-                            <div class="project-tech">
-                                <span>Python</span><span>R</span><span>SQL</span><span>Excel</span><span>Bloomberg Terminal</span>
-                            </div>
-                            <div class="project-footer">
-                                <a href="https://drive.google.com/drive/folders/1dyFLXyGfobFDZ1CO_NQF1Lgd3L93jJFS?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Other 5 -->
                     <div class="project-card">
                         <a href="https://nudgecoach.vercel.app/" class="project-full-link" target="_blank" rel="noopener" aria-label="View Nudge Live Demo"></a>
                         <div class="project-img-wrapper grad-nudge">
@@ -576,7 +534,6 @@
                         </div>
                     </div>
 
-                    <!-- Other 6 -->
                     <div class="project-card">
                         <a href="https://chatgpt.com/g/g-68f8c5dbb4e88191972bfe3a43de6b21-kinetiq" class="project-full-link" target="_blank" rel="noopener" aria-label="View KineticIQ Live Demo"></a>
                         <div class="project-img-wrapper grad-kineticiq">
@@ -599,7 +556,179 @@
                         </div>
                     </div>
 
-                    <!-- Other 7 -->
+                </div>
+                <div class="projects-grid other-grid" style="margin-top:1rem;">
+                    <div class="project-card">
+                        <a href="https://github.com/sageofninetale/meeting-tool" class="project-full-link" target="_blank" rel="noopener" aria-label="View AI Interview Copilot on GitHub"></a>
+                        <div class="project-img-wrapper grad-interview-copilot">
+                            <img src="images/projects/interview-copilot.jpeg" alt="AI Interview Copilot" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-ai">AI/ML</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">AI Interview Copilot</h4>
+                            <p class="project-desc">A desktop tool that listens during interviews and suggests answers in real time based on your own knowledge base. Built on a forked open-source app using Electron, React, Whisper, and the Claude API.</p>
+                            <div class="project-tech">
+                                <span>Electron</span><span>React</span><span>Whisper</span><span>Claude API</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/sageofninetale/meeting-tool" class="project-cta cta-case-study" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 4: Data & Analytics -->
+            <div class="projects-tier">
+                <h3 class="tier-title"><span class="tier-label-t4">T4</span> Data & Analytics</h3>
+                <div class="projects-grid other-grid">
+                    <div class="project-card">
+                        <a href="https://rag-pipeline-expertiment.streamlit.app" class="project-full-link" target="_blank" rel="noopener" aria-label="View RAG Pipeline Live Demo"></a>
+                        <div class="project-img-wrapper grad-rag-pipeline">
+                            <img src="images/projects/rag-pipeline.jpeg" alt="RAG Pipeline" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-ai">AI/ML</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">RAG Pipeline</h4>
+                            <p class="project-desc">Upload any PDF and ask questions — it finds the right answers using semantic search. Powered by LlamaIndex, ChromaDB, and HuggingFace embeddings with session-cached indexing for instant re-use.</p>
+                            <div class="project-tech">
+                                <span>LlamaIndex</span><span>ChromaDB</span><span>Groq</span><span>Streamlit</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/sageofninetale/rag-experiment" class="project-cta cta-case-study" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://rag-pipeline-expertiment.streamlit.app" class="project-cta cta-live" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <a href="https://langgraph-scout-football.streamlit.app" class="project-full-link" target="_blank" rel="noopener" aria-label="View LangGraph Scout Live Demo"></a>
+                        <div class="project-img-wrapper grad-langgraph-scout">
+                            <img src="images/projects/langgraph-scout.jpeg" alt="LangGraph Scout" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-ai">AI/ML</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">LangGraph Scout</h4>
+                            <p class="project-desc">A multi-agent football scouting tool that searches the web, analyses player stats, and generates scout reports automatically. Built with LangGraph conditional routing, Groq, and Tavily search.</p>
+                            <div class="project-tech">
+                                <span>LangGraph</span><span>Groq</span><span>Tavily</span><span>Streamlit</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/sageofninetale/langgraph-experiment" class="project-cta cta-case-study" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://langgraph-scout-football.streamlit.app" class="project-cta cta-live" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <a href="https://langchain-research-chain.streamlit.app" class="project-full-link" target="_blank" rel="noopener" aria-label="View LangChain Research Chain Live Demo"></a>
+                        <div class="project-img-wrapper grad-langchain-research">
+                            <img src="images/projects/langchain-research.jpeg" alt="LangChain Research Chain" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-ai">AI/ML</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">LangChain Research Chain</h4>
+                            <p class="project-desc">Ask a complex question and watch it get broken into parts, researched separately, then combined into one clear answer. A three-stage LCEL pipeline built with LangChain, Groq, and Streamlit.</p>
+                            <div class="project-tech">
+                                <span>LangChain</span><span>Groq</span><span>Streamlit</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/sageofninetale/langchain-experiment" class="project-cta cta-case-study" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://langchain-research-chain.streamlit.app" class="project-cta cta-live" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-grid other-grid" style="margin-top:1rem;">
+
+                    <div class="project-card">
+                        <a href="https://drive.google.com/drive/folders/1BsJLbU3wwp6x_HsDhpWfP2p06iBt5eO7?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Route Performance Case Study"></a>
+                        <div class="project-img-wrapper grad-network-rail">
+                            <img src="images/projects/network-rail.png" alt="Route Performance" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-data">DATA/BI</span>
+                                <span class="project-client">Network Rail</span>
+                            </div>
+                            <h4 class="project-title">Route Performance: Delay Insights</h4>
+                            <p class="project-desc">Dashboard tracking UK railway station accessibility.</p>
+                            <div class="project-tech">
+                                <span>Power BI</span><span>SQL</span><span>Python</span><span>Excel</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://drive.google.com/drive/folders/1BsJLbU3wwp6x_HsDhpWfP2p06iBt5eO7?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <a href="https://drive.google.com/drive/folders/1b1CwM9ydQLgkir6Qgd0GNa1K7Gw7Rwz0?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Sales Insights Case Study"></a>
+                        <div class="project-img-wrapper grad-retail-insights">
+                            <img src="images/projects/retail-insights.png" alt="Sales, Cancellations & Margins" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-data">DATA/BI</span>
+                                <span class="project-client">Retail Insights</span>
+                            </div>
+                            <h4 class="project-title">Sales, Cancellations & Margins</h4>
+                            <p class="project-desc">Sales forecasting platform with 92% accuracy.</p>
+                            <div class="project-tech">
+                                <span>Tableau</span><span>SQL</span><span>Python</span><span>R</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://drive.google.com/drive/folders/1b1CwM9ydQLgkir6Qgd0GNa1K7Gw7Rwz0?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tier 5: Research & Finance -->
+            <div class="projects-tier">
+                <h3 class="tier-title"><span class="tier-label-t5">T5</span> Research & Finance</h3>
+                <div class="projects-grid other-grid">
+
+                    <div class="project-card">
+                        <a href="https://drive.google.com/drive/folders/1dyFLXyGfobFDZ1CO_NQF1Lgd3L93jJFS?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Crypto Research Case Study"></a>
+                        <div class="project-img-wrapper grad-jp-morgan">
+                            <img src="images/projects/jp-morgan.png" alt="Crypto & Mutual Funds" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-finance">FINANCE</span>
+                                <span class="project-client">JP Morgan Chase</span>
+                            </div>
+                            <h4 class="project-title">Crypto & Mutual Funds as Inflation Hedges</h4>
+                            <p class="project-desc">Consultancy project on portfolio diversification and credit risk.</p>
+                            <div class="project-tech">
+                                <span>Python</span><span>R</span><span>SQL</span><span>Excel</span><span>Bloomberg Terminal</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://drive.google.com/drive/folders/1dyFLXyGfobFDZ1CO_NQF1Lgd3L93jJFS?usp=sharing" class="project-cta cta-case-study" target="_blank" rel="noopener" aria-label="Case Study"><i class="fas fa-file-alt"></i> Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="project-card">
                         <a href="https://drive.google.com/drive/folders/1gO-GfCCak2iK9HonR485MWRbS8Sr30Nc?usp=sharing" class="project-full-link" target="_blank" rel="noopener" aria-label="View Financial Model Case Study"></a>
                         <div class="project-img-wrapper grad-urbanfuel">
@@ -623,7 +752,27 @@
                     </div>
 
                 </div>
+                <div class="projects-grid other-grid" style="margin-top:1rem;">
+                    <div class="project-card">
+                        <div class="project-img-wrapper grad-cardputer">
+                            <img src="images/projects/cardputer.jpeg" alt="Cardputer Terminal" class="project-img" loading="lazy">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <span class="project-category badge-data">HARDWARE</span>
+                                <span class="project-client">Personal Project</span>
+                            </div>
+                            <h4 class="project-title">Cardputer Terminal</h4>
+                            <p class="project-desc">Custom shell interface on M5Stack Cardputer (ESP32-S3). MicroPython firmware, UART bridge, and mini keyboard input handler.</p>
+                            <div class="project-tech">
+                                <span>MicroPython</span><span>ESP32-S3</span><span>UART</span><span>Hardware</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -632,6 +781,8 @@
     <!-- Featured Event: Code with Claude London -->
     <section id="event" class="section event-section">
         <div class="container">
+            <h2 class="section-title">Event</h2>
+            <p class="section-subtitle">In the rooms where AI is being built</p>
             <div class="event-inner">
 
                 <!-- Header: centered badge + headline -->
@@ -782,6 +933,7 @@
                 </svg>
             </div>
     <script src="script.js"></script>
+    <script src="chat.js"></script>
 </body>
 
 </html>
